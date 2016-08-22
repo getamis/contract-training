@@ -1,0 +1,13 @@
+{
+  "name": "contract-training",
+  "version": "0.1.0",
+  "dependencies": {
+    "web3": "0.16.0",
+    "ethereumjs-testrpc": "2.1.0",
+    "express": "4.14.0",
+    "mocha": "2.4.5"
+  },
+  "scripts": {
+     "test": "find tests -name '*tests.js' -not -path './node_modules/*' | xargs ./node_modules/mocha/bin/_mocha -R spec"
+  }
+}

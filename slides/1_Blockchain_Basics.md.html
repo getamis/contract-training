@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Blockchain Basics</title>
+		<style>
+			body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+h1, h2, h3 {
+	font-weight: 400;
+	margin-bottom: 0;
+}
+.remark-slide-content h1 { font-size: 3em; }
+.remark-slide-content h2 { font-size: 2em; }
+.remark-slide-content h3 { font-size: 1.6em; }
+.footnote {
+	position: absolute;
+	bottom: 3em;
+}
+li p { line-height: 1.25em; }
+.red { color: #fa0000; }
+.large { font-size: 2em; }
+a, a > code {
+	color: rgb(249, 38, 114);
+	text-decoration: none;
+}
+code {
+	background: none repeat scroll 0 0 #F8F8FF;
+  border: 1px solid #DEDEDE;
+  border-radius: 3px 	;
+  padding: 0 0.2em;
+}
+.remark-code, .remark-inline-code { font-family: "Bitstream Vera Sans Mono", "Courier", monospace; }
+.remark-code-line-highlighted     { background-color: #373832; }
+.pull-left {
+	float: left;
+	width: 47%;
+}
+.pull-right {
+	float: right;
+	width: 47%;
+}
+.pull-right ~ p {
+	clear: both;
+}
+#slideshow .slide .content code {
+	font-size: 0.8em;
+}
+#slideshow .slide .content pre code {
+	font-size: 0.9em;
+	padding: 15px;
+}
+.main-title, .title {
+	background: #272822;
+	color: #777872;
+	text-shadow: 0 0 20px #333;
+}
+.title h1, .title h2, .main-title h1, .main-title h2 {
+	color: #f3f3f3;
+	line-height: 0.8em;
+}
+/* Custom */
+.remark-code {
+	display: block;
+	padding: 0.5em;
+}
+
+		</style>
+	</head>
+	<body>
+		<textarea id="source">
+class: center, middle
+
+# Blockchain Basics
+
+---
+
+## Blockchain 1.0 - Bitcoin and Alt coins (Dogecoin, Litecoin, etc)
+- P2P payment system
+
+- Blockchain
+
+    - Immutable: create and read. no update and delete.
+
+    - Non-repudiable: digital signatures, sign & verify
+
+    - Fault-tolerant: censorship resistant, partially-connected mesh resilience
+
+---
+
+## Blockchain 1.1 - Colored Coins, Decoration protocols
+- Colored coins – leverage additional 40 bytes scripting size in Bitcoin
+
+- Mastercoin, Bitshares and Counterparty
+
+    - financial derivatives
+
+    - savings wallets
+
+    - decentralized exchange
+
+---
+## Blockchain 2.0 - Ethereum, Tendermint
+- General purpose blockchain
+
+- Ethereum: TCP/IP = Bitcoin: SMTP
+
+---
+## Ethereum
+- Turing-complete
+
+- Universal scripting language
+
+- Mining algorithm - specialized hardware resistant. (Dagger)
+
+- Fee system
+
+- GHOST (fast block confirmation time, 3 ~ 30 sec)
+
+---
+## Ethereum Virtual Machine vs. Bitcoin Scripting
+| Ethereum | Bitcoin |
+| -- | -- |
+| Turing-completeness | Turing-incomplete - no loop |
+| State-awareness | Lack of state - single stage |
+| Value-awareness | Value-blindness - all or nothing |
+| Blockchain-awareness | Blockchain-blindness - no blockchain reference |
+
+---
+## Accounts vs UTXO
+- Accounts
+
+    - Large space savings
+
+    - Greater fungibility
+
+    - Simplicity
+
+    - Constant light client reference
+
+- UTXO
+
+    - Higher degree of privacy
+
+    - Potential scalability paradigms
+
+---
+## Why not UTXO - State
+- UTXOs are unnecessarily complicated
+
+- UTXOs are stateless, and so are not well-suited to dapps
+
+---
+## Bitcoin Script: pay-to-pubkey-hash
+| Stack | Script | Description |
+| -- | -- | -- |
+| Empty. | `<sig> <pubKey> OP_DUP OP_HASH160 <pubKeyHash> OP_EQUALVERIFY OP_CHECKSIG` |scriptSig and scriptPubKey are combined. |
+| `<sig> <pubKey>` | `OP_DUP OP_HASH160 <pubKeyHash> OP_EQUALVERIFY OP_CHECKSIG` | Constants are added to the stack. |
+| `<sig> <pubKey> <pubKey>` | `OP_HASH160 <pubKeyHash> OP_EQUALVERIFY OP_CHECKSIG`|Top stack item is duplicated. |
+| `<sig> <pubKey> <pubHashA>` | `<pubKeyHash> OP_EQUALVERIFY OP_CHECKSIG` | Top stack item is hashed. |
+| `<sig> <pubKey> <pubHashA> <pubKeyHash>` | `OP_EQUALVERIFY OP_CHECKSIG` | Constant added. |
+| `<sig> <pubKey>` | `OP_CHECKSIG` |Equality is checked between the top two stack items. |
+| `true` | Empty. | Signature is checked for top two stack items.|
+
+---
+## Ethereum Virtual Machine v.s. Bitcoin Scripting (2)
+- Bitcoin script is primarily about expressing ownership conditions.
+
+- Ethereum script is more suited to describing business logic (though it can express ownership conditions too)
+
+		</textarea>
+		<script src="https://amisamity.github.io/contract-training/slides/js/remark-latest.min.js"></script>
+		<script>
+			var slideshow = remark.create();
+		</script>
+		<script></script>
+	</body>
+</html>
