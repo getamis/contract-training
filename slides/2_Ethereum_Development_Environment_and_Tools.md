@@ -96,9 +96,6 @@ contract OneValue {
 - Javascript Console:
     - https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console
 
-- Attach to Mist geth console:
-    - `geth attach ipc:~/Library/Ethereum/geth.ipc`
-
 ---
 
 ## Run geth (mainnet)
@@ -132,6 +129,20 @@ geth --fast \
 ```
 
 ---
+## Geth API
+
+- IPC: Unix socket
+
+    - Attach to Mist geth console:
+    ```
+    geth attach ipc:~/Library/Ethereum/geth.ipc
+    ```
+
+- RPC: HTTP API
+
+- WebSocket
+
+---
 ## Solidity compiler: solc
 
 - solcjs
@@ -151,19 +162,6 @@ cmake .. && make && make install
 ```
 
 ---
-
-## Solidity editor
-
-- Atom: language-ethereum
-
-- SublimeText: ethereum
-
-- Visual Studio: Solidity
-
-- Remix (formerly Mix) IDE https://github.com/ethereum/remix
-
----
-
 ## Compile contract
 
 - Browser-Solidity: https://ethereum.github.io/browser-solidity/
@@ -177,6 +175,19 @@ cmake .. && make && make install
     ```
 
 ---
+
+## Solidity editor
+
+- Atom: language-ethereum
+
+- SublimeText: ethereum
+
+- Visual Studio: Solidity
+
+- Remix (formerly Mix) IDE https://github.com/ethereum/remix
+
+---
+
 ## Libraries and development tools
 
 - Web3: https://github.com/ethereum/web3.js

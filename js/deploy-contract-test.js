@@ -25,6 +25,6 @@ web3.personal.unlockAccount(addr, 'test1234', function(e, r){
     if(e != null){
         console.log("Error:", e);
     }else {
-        var oneValue = OneValueContract.new(initValue, {from:addr, data: evmCode, gas: 4700000}, callback);
+        var oneValue = OneValueContract.new(initValue, {from:addr, data: evmCode, gas: 200000}, callback);
     }
 });
