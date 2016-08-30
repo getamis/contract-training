@@ -63,3 +63,28 @@ contract StateMachine {
     }
 }
 ```
+
+---
+## Checks-Effects-Interactions pattern
+
+```Javascript
+function auctionEnd() {
+    // 1. checking conditions
+    // 2. performing actions (potentially changing conditions)
+    // 3. interacting with other contracts
+
+    // 1. Conditions
+    if (now <= auctionStart + biddingTime)
+        throw; // auction did not yet end
+    if (ended)
+        throw; // this function has already been called
+
+    // 2. Effects
+    ended = true;
+    AuctionEnded(highestBidder, highestBid);
+
+    // 3. Interaction
+    if (!beneficiary.send(highestBid))
+        throw;
+}
+```
