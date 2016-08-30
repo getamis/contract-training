@@ -29,7 +29,7 @@ web3.personal.unlockAccount(addr, 'test1234', function(e, r){
     if(e != null){
         console.log("Error:", e);
     }else {
-        var txid = clientReceipt.deposit.sendTransaction(123, {from:addr, gas: 4700000});
+        var txid = clientReceipt.deposit.sendTransaction(123, {from:addr, gas: 50000});
         console.log("txid:", txid);
     }
 });
