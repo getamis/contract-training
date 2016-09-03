@@ -129,6 +129,71 @@ geth --fast \
 ```
 
 ---
+
+## Run geth (private chain)
+option 1: use `networkid`
+
+```bash
+geth --fast \
+    --datadir "~/.eth/privnet"  \
+    --ipcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3"  \
+    --rpc --rpccorsdomain "*"  \
+    --rpcapi "db,eth,net,web3,personal"  \
+    --rpcport "8545" \
+    --port "30303" \
+    --networkid "12345" \
+    --nodiscover \
+    console
+```
+---
+
+## Run geth (private chain)
+option 2: use both `networkid` and custom `genesis.json`
+
+Example genesis.json:
+
+```JSON
+{
+  "nonce": "0x0000000000000042",
+  "timestamp": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "extraData": "Any extra data 134ADFAD",
+  "gasLimit": "0x47e7c4",
+  "difficulty": "0x9c40",
+  "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x3333333333333333333333333333333333333333",
+  "alloc": {
+    "0x60cafee22ae353ac9de07852a682558c9bb84e61": {
+      "balance": "999999999999999999999999999999999"
+    }
+  }
+}
+```
+---
+
+## Run geth (private chain)
+option 2: use both `networkid` and custom `genesis.json`, so we can avoid network id collision.
+
+Init blockchain:
+```bash
+geth --datadir "~/.eth/privnet2"  \
+    init "/PATH/TO/genesis.json"
+```
+
+Run:
+```bash
+geth --fast \
+    --datadir "~/.eth/privnet2"  \
+    --ipcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3"  \
+    --rpc --rpccorsdomain "*"  \
+    --rpcapi "db,eth,net,web3,personal"  \
+    --rpcport "8545" \
+    --port "30303" \
+    --networkid "12345" \
+    --nodiscover \
+    console
+```
+---
 ## Geth API
 
 - IPC: Unix socket
