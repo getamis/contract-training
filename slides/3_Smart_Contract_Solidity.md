@@ -254,6 +254,8 @@ Fee to run transactions. `fee = gas * gasPrice`
     -> 0.00106 ether
     ```
 
+- Transaction tracking: [EtherScan](https://etherscan.io/charts/gasprice), [BlockSeer](https://www.blockseer.com/eth)
+
 ---
 ## Message calls
 
@@ -320,7 +322,7 @@ contract Purchase {
 
     modifier onlySeller() { // Modifier
         if (msg.sender != seller) throw;
-        _
+        _;
     }
 
     function abort() onlySeller { // Modifier usage
@@ -752,7 +754,7 @@ contract owned {
     modifier onlyOwner {
         if (msg.sender != owner)
             throw;
-        _
+        _;
     }
 }
 

@@ -51,7 +51,7 @@ contract StateMachine {
 
     modifier atStage(Stages _stage) {
         if (stage != _stage) throw;
-        _
+        _;
     }
 
     function bid() atStage(Stages.AcceptingBlindedBids) {
