@@ -10,7 +10,7 @@ contract WithdrawalContract {
     }
 
     function becomeRichest() returns (bool) {
-        if (msg.value mostSent) {
+        if (msg.value > mostSent) {
             pendingWithdrawals[richest] += msg.value;
             richest = msg.sender;
             mostSent = msg.value;

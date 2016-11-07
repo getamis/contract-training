@@ -13,22 +13,22 @@ contract Purchase {
 
     modifier require(bool _condition) {
         if (!_condition) throw;
-        _
+        _;
     }
 
     modifier onlyBuyer() {
         if (msg.sender != buyer) throw;
-        _
+        _;
     }
 
     modifier onlySeller() {
         if (msg.sender != seller) throw;
-        _
+        _;
     }
 
     modifier inState(State _state) {
         if (state != _state) throw;
-        _
+        _;
     }
 
     event aborted();

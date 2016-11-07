@@ -14,7 +14,7 @@ contract StateMachine {
 
     modifier atStage(Stages _stage) {
         if (stage != _stage) throw;
-        _
+        _;
     }
 
     function nextStage() internal {
@@ -32,7 +32,7 @@ contract StateMachine {
                 now >= creationTime + 12 days)
             nextStage();
         // The other stages transition by transaction
-        _
+        _;
     }
 
     // Order of the modifiers matters here!
@@ -53,7 +53,7 @@ contract StateMachine {
     // `nextStage` will not be called
     // automatically.
     modifier transitionNext() {
-        _
+        _;
         nextStage();
     }
 

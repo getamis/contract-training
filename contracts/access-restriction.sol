@@ -18,7 +18,7 @@ contract AccessRestriction {
         // Do not forget the "_"! It will
         // be replaced by the actual function
         // body when the modifier is invoked.
-        _
+        _;
     }
 
     /// Make `_newOwner` the new owner of this
@@ -31,7 +31,7 @@ contract AccessRestriction {
 
     modifier onlyAfter(uint _time) {
         if (now < _time) throw;
-        _
+        _;
     }
 
     /// Erase ownership information.
@@ -54,8 +54,8 @@ contract AccessRestriction {
     modifier costs(uint _amount) {
         if (msg.value < _amount)
             throw;
-        _
-        if (msg.value _amount)
+        _;
+        if (msg.value > _amount)
             msg.sender.send(msg.value - _amount);
     }
 
