@@ -242,8 +242,7 @@ Fee to run transactions. `fee = gas * gasPrice`
 
     ```go
     TxGasContractCreation = big.NewInt(53000)
-    // Per transaction not creating a contract.
-    // NOTE: Not payable on data of calls between transactions.
+    // Per transaction that creates a contract.
     ```
 
 - Current gas price: [EthStats](https://ethstats.net/), [EtherScan](https://etherscan.io/charts/gasprice)
@@ -320,7 +319,7 @@ Function modifiers can be used to amend the semantics of functions in a declarat
 contract Purchase {
     address public seller;
 
-    modifier onlySeller() { // Modifier
+    modifier onlySeller { // Modifier
         if (msg.sender != seller) throw;
         _;
     }
@@ -619,7 +618,7 @@ When calling functions of other contracts, the amount of Wei sent with the call 
 
 ```Javascript
 contract InfoFeed {
-    function info() returns (uint ret) { return 42; }
+    function info() payable returns (uint ret) { return 42; }
 }
 
 
@@ -631,6 +630,8 @@ contract Consumer {
 ```
 
 Be careful about the fact that `feed.info.value(10).gas(800)` only (locally) sets the value and amount of gas sent with the function call and only the parentheses at the end perform the actual call.
+
+Note: The keyword `payable` is required for the function to be able to receive Ether.
 
 ---
 ## Creating contracts via new
@@ -738,6 +739,7 @@ The visibility specifier is given after the type for state variables and between
 contract C {
     function f(uint a) private returns (uint b) { return a + 1; }
     function setData(uint a) internal { data = a; }
+
     uint public data;
 }
 ```
@@ -813,6 +815,12 @@ contract Caller {
 ```
 
 ---
+
+## Fallback function warning
+
+Contracts that **receive Ether but do not define a fallback function throw an exception**, sending back the Ether (this was different before Solidity v0.4.0). So if you want your contract to receive Ether, you have to implement a fallback function.
+
+---
 ## Events
 Events allow the convenient usage of the EVM logging facilities, which in turn can be used to "call" JavaScript callbacks in the user interface of a dapp, which listen for these events.
 
@@ -838,7 +846,7 @@ contract ClientReceipt {
 ## Watch event with web3
 
 ```bash
-node watch-client-recipient.js
+node watch-client-receipt.js
 ```
 
 ``` Javascript

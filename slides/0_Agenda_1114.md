@@ -30,3 +30,10 @@ class: center, middle
 - 設計模式
 
 - 測試
+
+---
+
+## Github
+- Github: https://github.com/amisamity/contract-training
+
+![https://github.com/amisamity/contract-training](../qrcode.png "https://github.com/amisamity/contract-training")
