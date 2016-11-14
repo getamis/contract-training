@@ -343,6 +343,13 @@ cmake .. && make && make install
 - Open dapp:
     `open http://localhost:8080`
 
+---
+## Contract deployment
+- Mist
+
+- Truffle
+
+- Web3
 
 ---
 ## Deploy contract with Mist
