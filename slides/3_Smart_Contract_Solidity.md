@@ -30,8 +30,7 @@ contract OneValue {
 Deployed in testnet at [`0x36274a6286c9cf3c8e09c85c5bfa572a8827fddc`](http://testnet.etherscan.io/address/0xa854322224c30eb0863fb749b88e9a74f022bdf2)
 
 ---
-class: center, middle
-#Ethereum Virtual Machine
+##Ethereum Virtual Machine
 
 ### The Ethereum Virtual Machine or EVM is the runtime environment for smart contracts in Ethereum.
 
