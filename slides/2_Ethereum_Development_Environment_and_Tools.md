@@ -108,7 +108,6 @@ geth --fast  \
     --rpcapi "db,eth,net,web3,personal"  \
     --rpcport "8547"  \
     --port "30305" \
-    --support-dao-fork \
     console
 ```
 
@@ -317,6 +316,24 @@ cmake .. && make && make install
     });
     ```
 
+- NOTE: As of version 3.0.2, testrpc requires at least Node 6.9.1 to run - this is because the ethereumjs-vm@2.0.1 dependency is now shipping using ES2015 language features.
+
+- Suggestion: using NVM [https://github.com/creationix/nvm](https://github.com/creationix/nvm)
+
+---
+## NVM
+Node Version Manager - Simple bash script to manage multiple active node.js versions
+
+- Install:
+
+    https://github.com/creationix/nvm#installation
+
+- Use nvm:
+```
+> cd js
+> use nvm
+```
+
 ---
 ## Truffle
 
@@ -370,6 +387,8 @@ cmake .. && make && make install
 - Add migration file: `3_deploy_one_value_contract.js`
 
 - Deploy: `truffle migrate`
+
+- Note: need to unlock account before deployment if you are using live network.
 
 ---
 ## Deploy contract with Web3
