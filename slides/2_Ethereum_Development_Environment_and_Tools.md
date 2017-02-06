@@ -331,7 +331,25 @@ Node Version Manager - Simple bash script to manage multiple active node.js vers
 - Use nvm:
 ```
 > cd js
-> use nvm
+> nvm use
+```
+
+---
+### NVM (install 6.9.1)
+
+- Install:
+```
+nvm install 6.9.1
+```
+
+- List installations:
+```
+nvm list
+```
+
+- Use:
+```
+nvm use 6.9.1
 ```
 
 ---
