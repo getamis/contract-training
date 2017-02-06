@@ -145,7 +145,7 @@ contract OneValue {
 }
 ```
 
-Deployed in testnet at [`0x36274a6286c9cf3c8e09c85c5bfa572a8827fddc`](http://testnet.etherscan.io/address/0xa854322224c30eb0863fb749b88e9a74f022bdf2)
+Deployed in testnet at [`0xd34d02bd80b7ad234305e734bd229746e5fe204e`](http://testnet.etherscan.io/address/0xd34d02bd80b7ad234305e734bd229746e5fe204e)
 
 ---
 ##Ethereum Virtual Machine
@@ -193,24 +193,27 @@ eth.sendTransaction(
     {from:addr, to:to, value:web3.toWei(1.123, "ether")});
 ```
 
-Example transaction: [`0x6ff92284137aca5dde8da8a157d9749b2a268f80fe72c9880ad1c4e7b68dca06`](http://testnet.etherscan.io/tx/0x6ff92284137aca5dde8da8a157d9749b2a268f80fe72c9880ad1c4e7b68dca06)
+Example transaction: [`0xc7e9557e1a97aa4b6cbcd0dd07379121730a68de2bde67b9d5815a69b35a250f`](http://testnet.etherscan.io/tx/0xc7e9557e1a97aa4b6cbcd0dd07379121730a68de2bde67b9d5815a69b35a250f)
 
 ---
 ## Transactions: send ether value
 
 ```Javascript
-> eth.getTransaction("0x6ff92284137aca5dde8da8a157d9749b2a268f80fe72c9880ad1c4e7b68dca06")
+> eth.getTransaction("0xc7e9557e1a97aa4b6cbcd0dd07379121730a68de2bde67b9d5815a69b35a250f")
 {
-  blockHash: "0x0000000000000000000000000000000000000000000000000000000000000000",
-  blockNumber: null,
+  blockHash: "0x1b18a2ea2c63991c05232c289c19be0dcfe463edf76be0fb63e5ac0847d621ca",
+  blockNumber: 396919,
   from: "0xf868d5b4a75a124f40e70b56ae5fa4dd9f802aa1",
   gas: 90000,
   gasPrice: 20000000000,
-  hash: "0x6ff92284137aca5dde8da8a157d9749b2a268f80fe72c9880ad1c4e7b68dca06",
+  hash: "0xc7e9557e1a97aa4b6cbcd0dd07379121730a68de2bde67b9d5815a69b35a250f",
   input: "0x",
-  nonce: 1048605,
+  nonce: 11,
+  r: "0x5b10648e0aae6c85b74cd0bca90c04e97ad5672f0a7cd7a42602145b10ec080a",
+  s: "0x3b5f971a4b0ca412188ee07d7b69cfb7b0c80e6854b0bf80e7e61d3bc4dcf7d3",
   to: "0x32124ceb661133adabf63189b5950394bbc3e922",
-  transactionIndex: null,
+  transactionIndex: 0,
+  v: "0x2a",
   value: 1123000000000000000
 }
 ```
@@ -218,19 +221,20 @@ Example transaction: [`0x6ff92284137aca5dde8da8a157d9749b2a268f80fe72c9880ad1c4e
 ---
 ## Transactions: send ether value
 ```Javascript
-> eth.getTransactionReceipt("0x6ff92284137aca5dde8da8a157d9749b2a268f80fe72c9880ad1c4e7b68dca06")
+> eth.getTransactionReceipt("0xc7e9557e1a97aa4b6cbcd0dd07379121730a68de2bde67b9d5815a69b35a250f")
 {
- blockHash: "0xca5b334a3273662a7210e9ff5d02690153f90d61d96dc176d9395a2a9c58a8a4",
- blockNumber: 1523623,
- contractAddress: null,
- cumulativeGasUsed: 67321,
- from: "0xf868d5b4a75a124f40e70b56ae5fa4dd9f802aa1",
- gasUsed: 21000,
- logs: [],
- root: "07f4c6f3ace8b639ec67930b2d28524dfc2fd779209962a67084757924e3c7e0",
- to: "0x32124ceb661133adabf63189b5950394bbc3e922",
- transactionHash: "0x6ff92284137aca5dde8da8a157d9749b2a268f80fe72c9880ad1c4e7b68dca06",
- transactionIndex: 1
+  blockHash: "0x1b18a2ea2c63991c05232c289c19be0dcfe463edf76be0fb63e5ac0847d621ca",
+  blockNumber: 396919,
+  contractAddress: null,
+  cumulativeGasUsed: 21000,
+  from: "0xf868d5b4a75a124f40e70b56ae5fa4dd9f802aa1",
+  gasUsed: 21000,
+  logs: [],
+  logsBloom: "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  root: "0xfa81c915ca3c1a0ae5b565360906046c17da5412d5f20201f3a4ffddc80937df",
+  to: "0x32124ceb661133adabf63189b5950394bbc3e922",
+  transactionHash: "0xc7e9557e1a97aa4b6cbcd0dd07379121730a68de2bde67b9d5815a69b35a250f",
+  transactionIndex: 0
 }
 ```
 
@@ -255,43 +259,47 @@ var oneValue = OneValueContract.new(initValue,
 oneValue.getValue();
 ```
 
-Example transaction: [`0x3cf7fff1a997d8094482117e8eb98872fa307b1a8a0d5e90fb879c016928989a`](http://testnet.etherscan.io/tx/0x3cf7fff1a997d8094482117e8eb98872fa307b1a8a0d5e90fb879c016928989a)
+Example transaction: [`0xc4974221fedc7455c68d980b396ae9a2dd210bb149f448c0d56bea15badd98b2`](http://testnet.etherscan.io/tx/0xc4974221fedc7455c68d980b396ae9a2dd210bb149f448c0d56bea15badd98b2)
 
 
 ---
 ## Transactions: create / deploy contract
 ```Javascript
-> eth.getTransaction("0x3cf7fff1a997d8094482117e8eb98872fa307b1a8a0d5e90fb879c016928989a")
+> eth.getTransaction("0xc4974221fedc7455c68d980b396ae9a2dd210bb149f448c0d56bea15badd98b2")
 {
-  blockHash: "0x0000000000000000000000000000000000000000000000000000000000000000",
-  blockNumber: null,
+  blockHash: "0xed9ebcd17447713ccd2a4ef4c4afc1a59ebb14d49a4e9c43d61f02704717e199",
+  blockNumber: 396928,
   from: "0xf868d5b4a75a124f40e70b56ae5fa4dd9f802aa1",
-  gas: 4700000,
+  gas: 200000,
   gasPrice: 20000000000,
-  hash: "0x3cf7fff1a997d8094482117e8eb98872fa307b1a8a0d5e90fb879c016928989a",
+  hash: "0xc4974221fedc7455c68d980b396ae9a2dd210bb149f448c0d56bea15badd98b2",
   input: "0x606060405260405160208060cf833981016040528080519060200190919050505b806000600050819055505b5060978060386000396000f360606040526000357c010000000000000000000000000000000000000000000000000000000090048063209652551460415780635524107714606257603f565b005b604c60048050506078565b6040518082815260200191505060405180910390f35b607660048080359060200190919050506089565b005b600060006000505490506086565b90565b806000600050819055505b5056000000000000000000000000000000000000000000000000000000000000007b",
-  nonce: 1048606,
+  nonce: 12,
+  r: "0xa348e9c69b0b8c093b1b2fb3f7c211bd3bc1b57922f9d0e0dccd2bcab755f727",
+  s: "0x3b891da5afdeb7b8bcaf8e59e65f46bbc517f4af000e0a2a674e480829ec28f2",
   to: null,
-  transactionIndex: null,
+  transactionIndex: 1,
+  v: "0x29",
   value: 0
 }
 ```
 ---
 ## Transactions: create / deploy contract
 ```JavaScript
-> eth.getTransactionReceipt("0x3cf7fff1a997d8094482117e8eb98872fa307b1a8a0d5e90fb879c016928989a")
+> eth.getTransactionReceipt("0xc4974221fedc7455c68d980b396ae9a2dd210bb149f448c0d56bea15badd98b2")
 {
-  blockHash: "0x1b61201bca0a050935f09fbd0480ef890ee0b186503e846719946ea39a03038a",
-  blockNumber: 1523633,
-  contractAddress: "0x33f880721bb6acc278e8530ed47ec2c4eeb11757",
-  cumulativeGasUsed: 115055,
+  blockHash: "0xed9ebcd17447713ccd2a4ef4c4afc1a59ebb14d49a4e9c43d61f02704717e199",
+  blockNumber: 396928,
+  contractAddress: "0xd34d02bd80b7ad234305e734bd229746e5fe204e",
+  cumulativeGasUsed: 353543,
   from: "0xf868d5b4a75a124f40e70b56ae5fa4dd9f802aa1",
   gasUsed: 115055,
   logs: [],
-  root: "34e3679ba5ffbb5e5bb0053d40bc692810b79fc630bacaff06e29742218ae431",
+  logsBloom: "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  root: "0xf86e5dfca0a372d2adbf9c1e91dd12edc653ffe93195dd42fd56fcbb14380ec3",
   to: null,
-  transactionHash: "0x3cf7fff1a997d8094482117e8eb98872fa307b1a8a0d5e90fb879c016928989a",
-  transactionIndex: 0
+  transactionHash: "0xc4974221fedc7455c68d980b396ae9a2dd210bb149f448c0d56bea15badd98b2",
+  transactionIndex: 1
 }
 ```
 
@@ -310,23 +318,26 @@ eth.getTransationReceipt(txid);
 oneValue.getValue();
 ```
 
-Example transaction: [`0x6d4f0f28d5e66dd0d0ce5f4e81513115f98dc00b7e59c3f926c5f4998ac0c026`](http://testnet.etherscan.io/tx/0x6d4f0f28d5e66dd0d0ce5f4e81513115f98dc00b7e59c3f926c5f4998ac0c026)
+Example transaction: [`0xf9132a6811770ffdecb5bd9ea9decc15beb66532f97d8ea0bca4f44cc135c276`](http://testnet.etherscan.io/tx/0xf9132a6811770ffdecb5bd9ea9decc15beb66532f97d8ea0bca4f44cc135c276)
 
 ---
 ## Transactions: send contract tx
 ```Javascript
-> eth.getTransaction("0x6d4f0f28d5e66dd0d0ce5f4e81513115f98dc00b7e59c3f926c5f4998ac0c026")
+> eth.getTransaction("0xf9132a6811770ffdecb5bd9ea9decc15beb66532f97d8ea0bca4f44cc135c276")
 {
-  blockHash: "0x0000000000000000000000000000000000000000000000000000000000000000",
-  blockNumber: null,
+  blockHash: "0xee094716246b40255460023aaa0d596eae4daab4b466b93f8a1ddbdcfe945784",
+  blockNumber: 396938,
   from: "0xf868d5b4a75a124f40e70b56ae5fa4dd9f802aa1",
   gas: 90000,
   gasPrice: 20000000000,
-  hash: "0x6d4f0f28d5e66dd0d0ce5f4e81513115f98dc00b7e59c3f926c5f4998ac0c026",
+  hash: "0xf9132a6811770ffdecb5bd9ea9decc15beb66532f97d8ea0bca4f44cc135c276",
   input: "0x5524107700000000000000000000000000000000000000000000000000000000000004d2",
-  nonce: 1048604,
-  to: "0x36274a6286c9cf3c8e09c85c5bfa572a8827fddc",
-  transactionIndex: null,
+  nonce: 13,
+  r: "0x29195d5d5d89e3fc188f859f184e52c4c5db0d78727bfff16d22df9eee31f47f",
+  s: "0x73c3a700c42683f76c39cc81d163dd734795aef86701d44fab855e8f96b29d44",
+  to: "0xd34d02bd80b7ad234305e734bd229746e5fe204e",
+  transactionIndex: 2,
+  v: "0x2a",
   value: 0
 }
 ```
@@ -335,19 +346,20 @@ Example transaction: [`0x6d4f0f28d5e66dd0d0ce5f4e81513115f98dc00b7e59c3f926c5f49
 ## Transactions: send contract tx
 
 ```Javascript
-> eth.getTransactionReceipt("0x6d4f0f28d5e66dd0d0ce5f4e81513115f98dc00b7e59c3f926c5f4998ac0c026")
+> eth.getTransactionReceipt("0xf9132a6811770ffdecb5bd9ea9decc15beb66532f97d8ea0bca4f44cc135c276")
 {
-  blockHash: "0xdfd3daeeb869e927588c04ea5207acdebc21905adbe51084f763fbe753c8b7b1",
-  blockNumber: 1523607,
+  blockHash: "0xee094716246b40255460023aaa0d596eae4daab4b466b93f8a1ddbdcfe945784",
+  blockNumber: 396938,
   contractAddress: null,
-  cumulativeGasUsed: 47688,
+  cumulativeGasUsed: 318120,
   from: "0xf868d5b4a75a124f40e70b56ae5fa4dd9f802aa1",
   gasUsed: 26688,
   logs: [],
-  root: "ef9cb0e4ce66bc2b6e4a09cb4af87d02018f9cf16996d4da19e2f0300ec0d205",
-  to: "0x36274a6286c9cf3c8e09c85c5bfa572a8827fddc",
-  transactionHash: "0x6d4f0f28d5e66dd0d0ce5f4e81513115f98dc00b7e59c3f926c5f4998ac0c026",
-  transactionIndex: 1
+  logsBloom: "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  root: "0x726e6c060c151429563f3fa6748a43bffb547716fca29ae4485dacfa149bec7f",
+  to: "0xd34d02bd80b7ad234305e734bd229746e5fe204e",
+  transactionHash: "0xf9132a6811770ffdecb5bd9ea9decc15beb66532f97d8ea0bca4f44cc135c276",
+  transactionIndex: 2
 }
 ```
 
@@ -362,7 +374,7 @@ Fee to run transactions. `fee = gas * gasPrice`
     // Per transaction that creates a contract.
     ```
 
-- Current gas price: [EthStats](https://ethstats.net/), [EtherScan](https://etherscan.io/charts/gasprice)
+- Current gas price: [EthStats](https://ethstats.net/), [EtherScan](https://etherscan.io/chart/gasprice)
 
     ```
     20 gwei = 20_000_000_000 wei (10**9)
@@ -370,7 +382,7 @@ Fee to run transactions. `fee = gas * gasPrice`
     -> 0.00106 ether
     ```
 
-- Transaction tracking: [EtherScan](https://etherscan.io/charts/gasprice), [BlockSeer](https://www.blockseer.com/eth)
+- Transaction tracking: [EtherScan](https://etherscan.io), [BlockSeer](https://www.blockseer.com/eth)
 
 ---
 ## Message calls
@@ -494,6 +506,8 @@ Solidity is a statically typed language.
 
 - Value types
 
+- Function types
+
 - Reference types
 
 ---
@@ -517,6 +531,61 @@ Solidity is a statically typed language.
 
 - Rational number and more
     http://solidity.readthedocs.io/en/latest/types.html#value-types
+
+---
+## Function types:
+
+- Two flavors: `internal` and `external` functions:
+    - Internal functions: can only be used inside the current contract.
+    - External functions: consist of an address and a function signature and can be passed via and returned from external function calls.
+
+- Notation:
+    `function (<parameter types>) {internal|external} [constant] [payable] [returns (<return types>)]`
+
+---
+## Function types:
+
+```Solidity
+library ArrayUtils {
+    function map(uint[] memory self, function (uint) returns (uint) f)
+      internal returns (uint[] memory r) {
+      r = new uint[](self.length);
+      for (uint i = 0; i < self.length; i++) {
+        r[i] = f(self[i]);
+      }
+    }
+    function reduce( uint[] memory self, function (uint x, uint y) returns (uint) f)
+      internal returns (uint r) {
+      r = self[0];
+      for (uint i = 1; i < self.length; i++) {
+        r = f(r, self[i]);
+      }
+    }
+    function range(uint length) internal returns (uint[] memory r) {
+      r = new uint[](length);
+      for (uint i = 0; i < r.length; i++) {
+        r[i] = i;
+      }
+    }
+}
+```
+
+---
+## Function types:
+```Javascript
+contract Pyramid {
+  using ArrayUtils for *;
+  function pyramid(uint l) returns (uint) {
+    return ArrayUtils.range(l).map(square).reduce(sum);
+  }
+  function square(uint x) internal returns (uint) {
+    return x * x;
+  }
+  function sum(uint x, uint y) internal returns (uint) {
+    return x + y;
+  }
+}
+```
 
 ---
 ## Reference types:
@@ -546,9 +615,25 @@ Complex type. Data not fit in 256 bits
 
     - state variables
 
-    - local variables always **reference** storage
+    - local variables
 
- - Assignments between storage and memory and also to a state variable always create an independent copy.
+- Assignments between storage and memory and also to a state variable always create an independent copy.
+
+---
+## Data location: summary
+
+- Forced data location:
+
+    - parameters (not return) of external functions: calldata
+
+    - state variables: storage
+
+- Default data location:
+
+    - parameters (also return) of functions: memory
+
+    - all other local variables: storage
+
 
 ---
 ## Common mistake
@@ -620,7 +705,7 @@ contract C {
 
 ---
 ## Limitation
-Fixed size memory arrays cannot be assigned to dynamically-sized memory arrays
+- Fixed size memory arrays cannot be assigned to dynamically-sized memory arrays
 
 ```JavaScript
 contract C {
@@ -631,6 +716,8 @@ contract C {
     }
 }
 ```
+
+- Creating arrays with variable length in memory can be done using the new keyword. As opposed to storage arrays, it is not possible to resize memory arrays by assigning to the .length member.
 
 ---
 ## Structs
@@ -666,7 +753,7 @@ contract CrowdFunding {
 ## Mappings
 Mapping types are declared as mapping `_KeyType => _ValueType`
 
-- `_KeyType` can be almost any type except for a mapping.
+- `_KeyType` can be almost any type except for a mapping, a dynamically sized array, a contract, an enum and a struct.
 
 - `_ValueType` can actually be any type, including mappings.
 
@@ -682,7 +769,7 @@ Mapping types are declared as mapping `_KeyType => _ValueType`
     ```
 
 ---
-### Type deduction
+## Type deduction
 ```Javascript
 uint24 x = 0x123;
 var y = x;
@@ -804,6 +891,15 @@ contract C {
     }
 }
 ```
+---
+## Assignments of Arrays and Structs
+- Assigning to a state variable always creates an independent copy.
+
+- Assigning to a local variable creates an independent copy only for elementary types.
+
+- Assigning structs and arrays from a state variable to a local variable, the local variable holds a reference.
+    - A second assignment only modify the reference and not change the state.
+    - Assignments to members (or elements) do change the state.
 
 ---
 ## Exceptions:
@@ -821,13 +917,36 @@ contract Sharer {
 
 ---
 ## Automatic exceptions
-- If you access an array beyond its length (i.e. x[i] where i >= x.length)
+- Access an array beyond its length (i.e. x[i] where i >= x.length)
 
-- If a function called via a message call does not finish properly (i.e. it runs out of gas or throws an exception itself).
+- Access a fixed-length bytesN at a too large or negative index.
 
-- If a non-existent function on a library is called or Ether is sent to a library.
+- Function called via a message call does not finish properly (i.e. it runs out of gas or throws an exception itself).
 
-Note: sending ether failure only return `false`
+- Create a contract using the `new` keyword but the contract creation does not finish properly
+
+- Divide or modulo by zero (e.g. `5 / 0` or `23 % 0`).
+
+- Shift by a negative amount.
+
+- Convert a value too big or negative into an enum type.
+
+- Perform an external function call targeting a contract that contains no code.
+
+- Contract receives Ether via a public function without payable modifier (including the constructor and the fallback function).
+
+- Contract receives Ether via a public accessor function.
+
+---
+## No exceptions for `send` and low-level calls
+
+- Return `false` in case of an exception:
+
+    - `send`
+
+    - `delegatecall`
+
+    - `callcode`
 
 ---
 ## Visibility and accessors
@@ -935,7 +1054,7 @@ contract Caller {
 
 ## Fallback function warning
 
-Contracts that **receive Ether but do not define a fallback function throw an exception**, sending back the Ether (this was different before Solidity v0.4.0). So if you want your contract to receive Ether, you have to implement a fallback function.
+Contracts that **receive Ether but do not define a fallback function throw an exception**, sending back the Ether (this was different before Solidity v0.4.0). So if you want your contract to receive Ether, you have to implement a `fallback function` (along with `payable` modifier).
 
 ---
 ## Events

@@ -1,5 +1,6 @@
 pragma solidity ^0.4.4;
 
+
 contract OneValue {
     uint256 value;
 
@@ -11,7 +12,7 @@ contract OneValue {
         value = v;
     }
 
-    function getValue() constant returns (uint256 result){
+    function getValue() constant returns (uint256 result) {
         return value;
     }
 }
