@@ -36,4 +36,5 @@ Repo for smart contract (solidity) training.
 - [3. Solidity Security](https://amisamity.github.io/contract-training/slides/4_Solidity_Security.md.html)
 - [4. Solidity Patterns](https://amisamity.github.io/contract-training/slides/5_Solidity_Patterns.md.html)
 - [5. Solidity Testing](https://amisamity.github.io/contract-training/slides/6_Solidity_Testing.md.html)
-- [6. References](https://amisamity.github.io/contract-training/slides/7_References.md.html)
+- [6. Insurance Example](https://amisamity.github.io/contract-training/slides/8_Insurance_Examples.md.html)
+- [7. References](https://amisamity.github.io/contract-training/slides/7_References.md.html)
