@@ -44,7 +44,7 @@ contract OneValue {
 }
 ```
 ---
-## All in one wallet: Mist
+## All in one wallet: Mist/Ethereum Wallet
 - The Mist browser is the tool of choice to browse and use Ðapps (decentralized applications).
 
 - Github: https://github.com/ethereum/mist
@@ -53,7 +53,7 @@ contract OneValue {
 
 ---
 
-## Mist demo
+## Ethereum Wallet demo
 
 - Network: mainnet and testnet
 
@@ -64,7 +64,6 @@ contract OneValue {
 - Send
 
 - Contracts
-
 
 ---
 
@@ -247,6 +246,12 @@ cmake .. && make && make install
 - Visual Studio: Solidity
 
 - Remix (formerly Mix) IDE https://github.com/ethereum/remix
+
+---
+
+## Mist demo - Remix IDE
+
+![alt text](images/mist.gif "mist")
 
 ---
 
