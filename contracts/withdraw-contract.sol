@@ -1,22 +1,23 @@
+pragma solidity ^0.4.0;
+
 contract WithdrawalContract {
     address public richest;
     uint public mostSent;
 
     mapping (address => uint) pendingWithdrawals;
 
-    function WithdrawalContract() {
+    function WithdrawalContract() payable {
         richest = msg.sender;
         mostSent = msg.value;
     }
 
-    function becomeRichest() returns (bool) {
+    function becomeRichest() payable returns (bool) {
         if (msg.value > mostSent) {
             pendingWithdrawals[richest] += msg.value;
             richest = msg.sender;
             mostSent = msg.value;
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -28,8 +29,7 @@ contract WithdrawalContract {
         pendingWithdrawals[msg.sender] = 0;
         if (msg.sender.send(amount)) {
             return true;
-        }
-        else {
+        } else {
             pendingWithdrawals[msg.sender] = amount;
             return false;
         }

@@ -8,6 +8,7 @@ describe('OneValueContract', function(){
     var primaryAddress;
     var oneValue;
     var initValue = 123;
+    var gas = 200000;
     web3.setProvider(TestRPC.provider());
     this.timeout(60000); //1 minute
 
@@ -21,7 +22,8 @@ describe('OneValueContract', function(){
         web3.eth.getAccounts(function(error, result){
             //3. Deploy
             primaryAddress = result[0]; //Blockchain Admin
-            oneValue = OneValueContract.new(initValue, {from:primaryAddress, data: bin}, function(error, contract){
+            oneValue = OneValueContract.new(initValue, {from:primaryAddress, data: bin, gas: gas}, function(error, contract){
+                assert.equal(error, null);
                 if(error == null && contract.address != null){
                     //Mined
                     done();
@@ -32,6 +34,7 @@ describe('OneValueContract', function(){
 
     it("initValue should be 123", function(done){
         oneValue.getValue(function(error, result){
+            assert.equal(error, null);
             assert.equal(initValue, result);
             done();
         });
@@ -39,8 +42,9 @@ describe('OneValueContract', function(){
 
     it("setValue should store value", function(done){
         var newValue = 456;
-        oneValue.setValue.sendTransaction(456, {from:primaryAddress}, function(error, txid){
+        oneValue.setValue.sendTransaction(456, {from:primaryAddress, gas: gas}, function(error, txid){
             oneValue.getValue(function(error, result){
+                assert.equal(error, null);
                 assert.equal(newValue, result);
                 done();
             });
