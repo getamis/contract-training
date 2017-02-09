@@ -43,6 +43,7 @@ contract OneValue {
     }
 }
 ```
+
 ---
 ## All in one wallet: Mist/Ethereum Wallet
 - The Mist browser is the tool of choice to browse and use Ðapps (decentralized applications).
@@ -143,6 +144,7 @@ geth --fast \
     --nodiscover \
     console
 ```
+
 ---
 
 ## Run geth (private chain)
@@ -167,6 +169,7 @@ Example genesis.json:
   }
 }
 ```
+
 ---
 
 ## Run geth (private chain)
@@ -191,6 +194,7 @@ geth --fast \
     --nodiscover \
     console
 ```
+
 ---
 ## Geth API
 
@@ -232,7 +236,7 @@ cmake .. && make && make install
 - solc
 
     ```
-    solc --abi --bin --gas -o ./build one-value.sol
+    solc --abi --bin --gas -o ./build OneValue.sol
     ```
 
 ---
@@ -359,6 +363,7 @@ nvm use 6.9.1
 
 ---
 ## Truffle
+- Document: http://truffleframework.com/docs/
 
 - Install:
     `npm install -g truffle`
@@ -394,7 +399,9 @@ nvm use 6.9.1
 ---
 ## Deploy contract with Mist
 
-### Contracts -> Deploy new contract -> Paste code and deploy
+- Contracts -> Deploy new contract -> Paste code and deploy
+
+- Remix IDE -> Create
 
 ---
 ## Deploy contract with Truffle

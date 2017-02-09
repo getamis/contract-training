@@ -397,7 +397,7 @@ cmake .. && make && make install
 
 - Enable rpc in console:
 
-    `admin.startRPC("0.0.0.0", "8545", "","db,eth,net,web3,personal")`
+    `admin.startRPC("0.0.0.0", 8545, "*","db,eth,net,web3,personal")`
 
 - Example code: `node web3-test.js`
 
@@ -596,7 +596,7 @@ app.listen(3000)
 - Test: `curl http://localhost:3000`
 
 		</textarea>
-		<script src="https://amisamity.github.io/contract-training/slides/js/remark-latest.min.js"></script>
+		<script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script>
 		<script>
 			var slideshow = remark.create();
 		</script>

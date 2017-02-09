@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "global": "^4.3.1",
+    "markdown-to-slides": "^1.0.5"
+  }
+}
