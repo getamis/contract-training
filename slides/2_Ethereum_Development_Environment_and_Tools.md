@@ -279,7 +279,7 @@ cmake .. && make && make install
 
 - Enable rpc in console:
 
-    `admin.startRPC("0.0.0.0", "8545", "","db,eth,net,web3,personal")`
+    `admin.startRPC("0.0.0.0", 8545, "*","db,eth,net,web3,personal")`
 
 - Example code: `node web3-test.js`
 
