@@ -293,9 +293,13 @@ Contracts in Solidity are similar to classes in object-oriented languages.
 
 - Events
 
-- Structs Types
+- Structs
 
-- Enum Types
+- Arrays
+
+- Mappings
+
+- Enum
 
 ---
 ## State variables
@@ -357,7 +361,7 @@ contract SimpleAuction {
 ```
 
 ---
-## Structs types
+## Structs
 Structs are custom defined types that can group several variables (see Structs in types section).
 
 ```Javascript
@@ -372,6 +376,54 @@ contract Ballot {
 ```
 
 ---
+## Arrays
+An array of fixed size k and element type `T` is written as `T[k]`, an array of dynamic size as `T[]`.
+
+Array members: `length`, `push`
+
+```JavaScript
+contract C {
+    function f(uint len) {
+        uint[] memory a = new uint[](7);
+        bytes memory b = new bytes(len);
+        // Here we have a.length == 7 and b.length == len
+        a[6] = 8;
+    }
+}
+```
+
+---
+## Arrays - limitation
+- Fixed size memory arrays cannot be assigned to dynamically-sized memory arrays
+
+```JavaScript
+contract C {
+    function f() {
+        // The next line creates a type error because uint[3] memory
+        // cannot be converted to uint[] memory.
+        uint[] x = [uint(1), 3, 4];
+    }
+}
+```
+
+- Creating arrays with variable length in memory can be done using the new keyword. As opposed to storage arrays, it is not possible to resize memory arrays by assigning to the .length member.
+
+---
+
+## Mappings
+Mapping types are declared as mapping `_KeyType => _ValueType`
+
+- `_KeyType` can be almost any type except for a mapping, a dynamically sized array, a contract, an enum and a struct.
+
+- `_ValueType` can actually be any type, including mappings.
+
+```Solidity
+//Ledger
+mapping (address => uint) balances;
+```
+
+---
+
 ## Enum types
 
 Enums are one way to create a user-defined type in Solidity. They are explicitly convertible to and from all integer types but implicit conversion is not allowed.
@@ -415,6 +467,66 @@ Solidity is a statically typed language.
     http://solidity.readthedocs.io/en/latest/types.html#value-types
 
 ---
+## Reference types:
+Complex type. Data not fit in 256 bits
+
+- Arrays:
+    - Value type arrays: fixed or dynamic length
+
+    - `bytes`: dynamically-sized byte array
+
+    - `string`: dynamically-sized UTF-8-encoded string
+
+- Structs
+
+- Mappings
+
+---
+## Data location: memory and storage
+
+- Memory: not persisting.
+
+    - function arguments
+
+    - return parameters
+
+- Storage: where the state variables are held
+
+    - state variables
+
+    - local variables
+
+- Assignments between storage and memory and also to a state variable always create an independent copy.
+
+---
+
+## Assignments of Arrays and Structs
+- Assigning to a state variable always creates an independent copy.
+
+- Assigning to a local variable creates an independent copy only for elementary types.
+
+- Assigning structs and arrays from a state variable to a local variable, the local variable holds a reference.
+    - A second assignment only modify the reference and not change the state.
+    - Assignments to members (or elements) do change the state.
+
+---
+
+## Data location: summary
+
+- Forced data location:
+
+    - parameters (not return) of external functions: calldata
+
+    - state variables: storage
+
+- Default data location:
+
+    - parameters (also return) of functions: memory
+
+    - all other local variables: storage
+
+---
+
 ## Function types:
 
 - Two flavors: `internal` and `external` functions:
@@ -470,176 +582,7 @@ contract Pyramid {
 ```
 
 ---
-## Reference types:
-Complex type. Data not fit in 256 bits
 
-- Arrays:
-    - Value type arrays: fixed or dynamic length
-
-    - `bytes`: dynamically-sized byte array
-
-    - `string`: dynamically-sized UTF-8-encoded string
-
-- Structs
-
-- Mappings
-
----
-## Data location: memory and storage
-
-- Memory: not persisting.
-
-    - function arguments
-
-    - return parameters
-
-- Storage: where the state variables are held
-
-    - state variables
-
-    - local variables
-
-- Assignments between storage and memory and also to a state variable always create an independent copy.
-
----
-## Data location: summary
-
-- Forced data location:
-
-    - parameters (not return) of external functions: calldata
-
-    - state variables: storage
-
-- Default data location:
-
-    - parameters (also return) of functions: memory
-
-    - all other local variables: storage
-
-
----
-## Common mistake
-```Javascript
-/// THIS CONTRACT CONTAINS AN ERROR
-contract C {
-    uint someVariable;
-    uint[] data;
-
-    function f() {
-        uint[] x;
-        x.push(2);
-        data = x;
-    }
-}
-```
-
-- x points to the storage slot 0 by default.
-
-> The type of the local variable x is uint[] storage, but since storage is not dynamically allocated, it has to be assigned from a state variable before it can be used. So no space in storage will be allocated for x, but instead it functions only as an alias for a pre-existing variable in storage.
-
-> What will happen is that the compiler interprets x as a storage pointer and will make it point to the storage slot 0 by default. This has the effect that someVariable (which resides at storage slot 0) is modified by x.push(2).
-
----
-
-## Example
-```Javascript
-contract C {
-    uint[] x; // the data location of x is storage
-
-    // the data location of memoryArray is memory
-    function f(uint[] memoryArray) {
-        x = memoryArray; // works, copies the whole array to storage
-        var y = x; // works, assigns a pointer, data location of y is storage
-        y[7]; // fine, returns the 8th element
-        y.length = 2; // fine, modifies x through y
-        delete x; // fine, clears the array, also modifies y
-        // The following does not work; it would need to create a new temporary /
-        // unnamed array in storage, but storage is "statically" allocated:
-        // y = memoryArray;
-        // This does not work either, since it would "reset" the pointer, but there
-        // is no sensible location it could point to.
-        // delete y;
-        g(x); // calls g, handing over a reference to x
-        h(x); // calls h and creates an independent, temporary copy in memory
-    }
-
-    function g(uint[] storage storageArray) internal {}
-    function h(uint[] memoryArray) {}
-}
-```
-
----
-## Arrays
-An array of fixed size k and element type `T` is written as `T[k]`, an array of dynamic size as `T[]`.
-
-Array members: `length`, `push`
-
-```JavaScript
-contract C {
-    function f(uint len) {
-        uint[] memory a = new uint[](7);
-        bytes memory b = new bytes(len);
-        // Here we have a.length == 7 and b.length == len
-        a[6] = 8;
-    }
-}
-```
-
----
-## Limitation
-- Fixed size memory arrays cannot be assigned to dynamically-sized memory arrays
-
-```JavaScript
-contract C {
-    function f() {
-        // The next line creates a type error because uint[3] memory
-        // cannot be converted to uint[] memory.
-        uint[] x = [uint(1), 3, 4];
-    }
-}
-```
-
-- Creating arrays with variable length in memory can be done using the new keyword. As opposed to storage arrays, it is not possible to resize memory arrays by assigning to the .length member.
-
----
-## Structs
-```Javascript
-contract CrowdFunding {
-
-    struct Funder {
-        address addr;
-        uint amount;
-    }
-
-    struct Campaign {
-        address beneficiary;
-        uint fundingGoal;
-        uint numFunders;
-        uint amount;
-        mapping (uint => Funder) funders;
-    }
-
-    uint numCampaigns;
-    mapping (uint => Campaign) campaigns;
-
-    function newCampaign(address beneficiary, uint goal) returns (uint campaignID) {
-        campaignID = numCampaigns++; // campaignID is return variable
-        // Creates new struct and saves in storage. We leave out the mapping type.
-        campaigns[campaignID] = Campaign(beneficiary, goal, 0, 0);
-    }
-    ...
-}
-```
-
----
-## Mappings
-Mapping types are declared as mapping `_KeyType => _ValueType`
-
-- `_KeyType` can be almost any type except for a mapping, a dynamically sized array, a contract, an enum and a struct.
-
-- `_ValueType` can actually be any type, including mappings.
-
----
 ## Conversions
 - Implicit Conversions
     uint8 is convertible to uint16 and int128 to int256, but int8 is not convertible to uint256
@@ -686,6 +629,38 @@ class: center, middle
 Most of the control structures from C/JavaScript are available in Solidity except for `switch` and `goto`.
 
 So there is: `if`, `else`, `while`, `for`, `break`, `continue`, `return`, `? :`, with the usual semantics known from C or JavaScript.
+
+---
+## Visibility and accessors
+- `external`:
+External functions are part of the contract interface, which means they can be called from other contracts and via transactions. An external function f cannot be called internally (i.e. `f()` does not work, but `this.f()` works). External functions are sometimes more efficient when they receive large arrays of data.
+
+- `public`:
+Public functions are part of the contract interface and can be either called internally or via messages. For public state variables, an automatic accessor function (see below) is generated.
+
+- `internal`:
+Those functions and state variables can only be accessed internally (i.e. from within the current contract or contracts deriving from it), without using `this`.
+
+- `private`:
+Private functions and state variables are only visible for the contract they are defined in and not in derived contracts.
+
+- Function defaults to `public`
+
+- State variable defaults to `internal`
+
+---
+## Visibility and accessors syntax
+
+The visibility specifier is given after the type for state variables and between parameter list and return parameter list for functions.
+
+```Javascript
+contract C {
+    function f(uint a) private returns (uint b) { return a + 1; }
+    function setData(uint a) internal { data = a; }
+
+    uint public data;
+}
+```
 
 ---
 ## Internal function calls
@@ -773,15 +748,6 @@ contract C {
     }
 }
 ```
----
-## Assignments of Arrays and Structs
-- Assigning to a state variable always creates an independent copy.
-
-- Assigning to a local variable creates an independent copy only for elementary types.
-
-- Assigning structs and arrays from a state variable to a local variable, the local variable holds a reference.
-    - A second assignment only modify the reference and not change the state.
-    - Assignments to members (or elements) do change the state.
 
 ---
 ## Exceptions:
@@ -829,61 +795,6 @@ contract Sharer {
     - `delegatecall`
 
     - `callcode`
-
----
-## Visibility and accessors
-- `external`:
-External functions are part of the contract interface, which means they can be called from other contracts and via transactions. An external function f cannot be called internally (i.e. `f()` does not work, but `this.f()` works). External functions are sometimes more efficient when they receive large arrays of data.
-
-- `public`:
-Public functions are part of the contract interface and can be either called internally or via messages. For public state variables, an automatic accessor function (see below) is generated.
-
-- `internal`:
-Those functions and state variables can only be accessed internally (i.e. from within the current contract or contracts deriving from it), without using `this`.
-
-- `private`:
-Private functions and state variables are only visible for the contract they are defined in and not in derived contracts.
-
-- Function defaults to `public`
-
-- State variable defaults to `internal`
-
----
-## Visibility and accessors syntax
-
-The visibility specifier is given after the type for state variables and between parameter list and return parameter list for functions.
-
-```Javascript
-contract C {
-    function f(uint a) private returns (uint b) { return a + 1; }
-    function setData(uint a) internal { data = a; }
-
-    uint public data;
-}
-```
-
----
-## Function modifiers
-Modifiers can be used to easily change the behaviour of functions, for example to automatically check a condition prior to executing the function. They are inheritable properties of contracts and may be overridden by derived contracts.
-
-```Javascript
-contract owned {
-    function owned() { owner = msg.sender; }
-    address owner;
-
-    modifier onlyOwner {
-        if (msg.sender != owner)
-            throw;
-        _;
-    }
-}
-
-contract mortal is owned {
-    function close() onlyOwner {
-        selfdestruct(owner);
-    }
-}
-```
 
 ---
 ## Constants
@@ -987,37 +898,40 @@ var event = clientReceipt.Deposit(function(error, result) {
 });
 ```
 
-Example tx: [`0x199f4dfb2410767b288dbbe5a2fb9999e831b1e4788ef399fe47682bcb3576bd`](https://testnet.etherscan.io/tx/0x199f4dfb2410767b288dbbe5a2fb9999e831b1e4788ef399fe47682bcb3576bd)
+Example tx: [`0x1119db10a1efd36dc386b40ad20946937d70d00ece3b6ebea59b4a287fae3a65`](https://testnet.etherscan.io/tx/0x1119db10a1efd36dc386b40ad20946937d70d00ece3b6ebea59b4a287fae3a65)
 
 ---
 
 ## Event transaction receipt
 
 ```JavaScript
-> eth.getTransactionReceipt("0x199f4dfb2410767b288dbbe5a2fb9999e831b1e4788ef399fe47682bcb3576bd")
+> eth.getTransactionReceipt("0x1119db10a1efd36dc386b40ad20946937d70d00ece3b6ebea59b4a287fae3a65")
 {
-  blockHash: "0xc863c78816456a92df83efa3ebac2abd44934beca747a2c950e88f70aa50677b",
-  blockNumber: 1524163,
+  blockHash: "0xa9f8121f9294e26da1b12254bede95801fbcbf6764e85b80c2b8e1301ff79218",
+  blockNumber: 506125,
   contractAddress: null,
-  cumulativeGasUsed: 23364,
+  cumulativeGasUsed: 2779639,
   from: "0xf868d5b4a75a124f40e70b56ae5fa4dd9f802aa1",
-  gasUsed: 23364,
+  gasUsed: 23450,
   logs: [{
-      address: "0x4d9e6d999e113b52ce96aee86a42f3279c115a73",
-      blockHash: "0xc863c78816456a92df83efa3ebac2abd44934beca747a2c950e88f70aa50677b",
-      blockNumber: 1524163,
+      address: "0x74e88c1ad4b66cd76bacf7165da056a87e483e87",
+      blockHash: "0xa9f8121f9294e26da1b12254bede95801fbcbf6764e85b80c2b8e1301ff79218",
+      blockNumber: 506125,
       data: "0x0000000000000000000000000000000000000000000000000000000000000000",
-      logIndex: 0,
+      logIndex: 6,
+      removed: false,
       topics: ["0x19dacbf83c5de6658e14cbf7bcae5c15eca2eedecf1c66fbca928e4d351bea0f", "0x000000000000000000000000f868d5b4a75a124f40e70b56ae5fa4dd9f802aa1", "0x7b00000000000000000000000000000000000000000000000000000000000000"],
-      transactionHash: "0x199f4dfb2410767b288dbbe5a2fb9999e831b1e4788ef399fe47682bcb3576bd",
-      transactionIndex: 0
+      transactionHash: "0x1119db10a1efd36dc386b40ad20946937d70d00ece3b6ebea59b4a287fae3a65",
+      transactionIndex: 12
   }],
-  root: "fdef0a80bd943ed621859633b973e8085670fa3b06663a2df623b20050c90a13",
-  to: "0x4d9e6d999e113b52ce96aee86a42f3279c115a73",
-  transactionHash: "0x199f4dfb2410767b288dbbe5a2fb9999e831b1e4788ef399fe47682bcb3576bd",
-  transactionIndex: 0
+  logsBloom: "0x00000000000000000000000000010100000004000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000100000000002000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000001000000000000000000000000000010010000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  root: "0xca92a0b372665b200770fa28ff047f46e304a375f681ee9b9353ecc5b2716a0a",
+  to: "0x74e88c1ad4b66cd76bacf7165da056a87e483e87",
+  transactionHash: "0x1119db10a1efd36dc386b40ad20946937d70d00ece3b6ebea59b4a287fae3a65",
+  transactionIndex: 12
 }
 ```
+
 ---
 ## Inheritance
 - Solidity supports multiple inheritance by copying code including polymorphism.
