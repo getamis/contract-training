@@ -82,6 +82,17 @@ contract OneValue {
     - Mac:  `~/Library/Ethereum`
 
 ---
+
+## In browser wallet - MetaMask
+
+- MetaMask: https://metamask.io/
+
+- Chrome plugin: https://goo.gl/8uPYIA
+
+![alt text](images/metamask.png "MetaMask")
+
+
+---
 ## Geth
 
 - Ethereum go implementation (Mist is actually using geth)
