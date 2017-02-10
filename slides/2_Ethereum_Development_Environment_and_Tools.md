@@ -344,7 +344,7 @@ Node Version Manager - Simple bash script to manage multiple active node.js vers
 ```
 
 ---
-### NVM (install 6.9.1)
+## NVM (install 6.9.1)
 
 - Install:
 ```
@@ -374,8 +374,21 @@ nvm use 6.9.1
 - Compile:
     `truffle compile`
 
--  Deploy:
+- Deploy:
     `truffle migrate`
+
+- Test:
+    `truffle test`
+
+---
+## Truffle Dapp
+
+- Default builder is no longer shipped with truffle from 3.*
+
+- Install default builder:
+    `npm install truffle-default-builder --save`
+
+- Config `truffle.js`
 
 - Build frontend:
     `truffle build`
@@ -412,7 +425,7 @@ nvm use 6.9.1
 
 - Edit `OneValue.sol`
 
-- Build: `truffle build`
+- Compile: `truffle compile`
 
 - Add migration file: `3_deploy_one_value_contract.js`
 
