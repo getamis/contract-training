@@ -835,7 +835,7 @@ bignumber.js@^2.1.4, bignumber.js@~2.1.4:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-2.1.4.tgz#29b3bb693dbb238e88b72eac2fb89650888b2d59"
 
-"bignumber.js@git+https://github.com/debris/bignumber.js#master", "bignumber.js@git+https://github.com/debris/bignumber.js.git#94d7146671b9719e00a09c29b01a691bc85048c2", "bignumber.js@git+https://github.com/debris/bignumber.js.git#master":
+"bignumber.js@git+https://github.com/debris/bignumber.js#master", "bignumber.js@git+https://github.com/debris/bignumber.js.git#94d7146671b9719e00a09c29b01a691bc85048c2":
   version "2.0.7"
   resolved "git+https://github.com/debris/bignumber.js#94d7146671b9719e00a09c29b01a691bc85048c2"
 
@@ -1615,7 +1615,28 @@ ethereumjs-block@^1.2.2, ethereumjs-block@~1.2.2:
     ethereumjs-util "^4.0.1"
     merkle-patricia-tree "^2.1.2"
 
-ethereumjs-testrpc@3.0.3:
+ethereumjs-testrpc@^2.0.7:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/ethereumjs-testrpc/-/ethereumjs-testrpc-2.2.7.tgz#ff732fefdb3a189e82d5f09b99946bff18140224"
+  dependencies:
+    async "^1.5.0"
+    bignumber.js "^2.1.4"
+    bip39 "^2.2.0"
+    ethereumjs-account "^2.0.4"
+    ethereumjs-block "^1.2.2"
+    ethereumjs-tx "^1.1.0"
+    ethereumjs-util "^4.5.0"
+    ethereumjs-vm "^1.3.0"
+    ethereumjs-wallet "^0.6.0"
+    fake-merkle-patricia-tree "^1.0.1"
+    merkle-patricia-tree "^2.1.2"
+    seedrandom "^2.4.2"
+    shelljs "^0.6.0"
+    web3 "^0.16.0"
+    web3-provider-engine "^8.0.3"
+    yargs "^3.29.0"
+
+ethereumjs-testrpc@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/ethereumjs-testrpc/-/ethereumjs-testrpc-3.0.3.tgz#830480310dc02355305b674bc1004ba8a649b44d"
   dependencies:
@@ -1638,35 +1659,14 @@ ethereumjs-testrpc@3.0.3:
     web3-provider-engine "~8.1.0"
     yargs "~3.29.0"
 
-ethereumjs-testrpc@^2.0.7:
-  version "2.2.7"
-  resolved "https://registry.yarnpkg.com/ethereumjs-testrpc/-/ethereumjs-testrpc-2.2.7.tgz#ff732fefdb3a189e82d5f09b99946bff18140224"
-  dependencies:
-    async "^1.5.0"
-    bignumber.js "^2.1.4"
-    bip39 "^2.2.0"
-    ethereumjs-account "^2.0.4"
-    ethereumjs-block "^1.2.2"
-    ethereumjs-tx "^1.1.0"
-    ethereumjs-util "^4.5.0"
-    ethereumjs-vm "^1.3.0"
-    ethereumjs-wallet "^0.6.0"
-    fake-merkle-patricia-tree "^1.0.1"
-    merkle-patricia-tree "^2.1.2"
-    seedrandom "^2.4.2"
-    shelljs "^0.6.0"
-    web3 "^0.16.0"
-    web3-provider-engine "^8.0.3"
-    yargs "^3.29.0"
-
-ethereumjs-tx@1.1.2, ethereumjs-tx@^1.0.0:
+ethereumjs-tx@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/ethereumjs-tx/-/ethereumjs-tx-1.1.2.tgz#c151477c6205d1860600e29108c3eacae97e29fa"
   dependencies:
     ethereum-common "^0.0.17"
     ethereumjs-util "^4.5.0"
 
-ethereumjs-tx@^1.1.0, ethereumjs-tx@^1.2.0:
+ethereumjs-tx@^1.0.0, ethereumjs-tx@^1.1.0, ethereumjs-tx@^1.2.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/ethereumjs-tx/-/ethereumjs-tx-1.2.2.tgz#f2890e70972c23217d2585a3d20a208ad22886be"
   dependencies:
@@ -2026,7 +2026,7 @@ glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.0, glob@~7.1.1:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-global@~4.3.0:
+global@^4.3.1, global@~4.3.0:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/global/-/global-4.3.1.tgz#5f757908c7cbabce54f386ae440e11e26b7916df"
   dependencies:
@@ -3405,21 +3405,21 @@ right-align@^0.1.1:
   dependencies:
     align-text "^0.1.1"
 
-rimraf@2, rimraf@^2.2.8, rimraf@~2.5.1, rimraf@~2.5.4:
+rimraf@2, rimraf@~2.5.1, rimraf@~2.5.4:
   version "2.5.4"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.5.4.tgz#96800093cbf1a0c86bd95b4625467535c29dfa04"
   dependencies:
     glob "^7.0.5"
 
-rimraf@~2.2.6:
-  version "2.2.8"
-  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
-
-rimraf@~2.4.3:
+rimraf@^2.2.8, rimraf@~2.4.3:
   version "2.4.5"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.4.5.tgz#ee710ce5d93a8fdb856fb5ea8ff0e2d75934b2da"
   dependencies:
     glob "^6.0.1"
+
+rimraf@~2.2.6:
+  version "2.2.8"
+  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
 
 ripemd160@^1.0.0:
   version "1.0.1"
@@ -3477,13 +3477,13 @@ semaphore@>=1.0.1, semaphore@^1.0.3:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/semaphore/-/semaphore-1.0.5.tgz#b492576e66af193db95d65e25ec53f5f19798d60"
 
-"semver@2 || 3 || 4 || 5", semver@~5.1.0:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-5.1.1.tgz#a3292a373e6f3e0798da0b20641b9a9c5bc47e19"
-
-"semver@2.x || 3.x || 4 || 5", semver@~5.3.0:
+"semver@2 || 3 || 4 || 5", "semver@2.x || 3.x || 4 || 5", semver@~5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
+
+semver@~5.1.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.1.1.tgz#a3292a373e6f3e0798da0b20641b9a9c5bc47e19"
 
 send@0.14.1:
   version "0.14.1"

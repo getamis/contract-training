@@ -43,6 +43,7 @@ contract OneValue {
     }
 }
 ```
+
 ---
 ## All in one wallet: Mist/Ethereum Wallet
 - The Mist browser is the tool of choice to browse and use Ðapps (decentralized applications).
@@ -79,6 +80,17 @@ contract OneValue {
 - Ethereum:
 
     - Mac:  `~/Library/Ethereum`
+
+---
+
+## In browser wallet - MetaMask
+
+- MetaMask: https://metamask.io/
+
+- Chrome plugin: https://goo.gl/8uPYIA
+
+![alt text](images/metamask.png "MetaMask")
+
 
 ---
 ## Geth
@@ -143,6 +155,7 @@ geth --fast \
     --nodiscover \
     console
 ```
+
 ---
 
 ## Run geth (private chain)
@@ -167,6 +180,7 @@ Example genesis.json:
   }
 }
 ```
+
 ---
 
 ## Run geth (private chain)
@@ -191,6 +205,7 @@ geth --fast \
     --nodiscover \
     console
 ```
+
 ---
 ## Geth API
 
@@ -232,7 +247,7 @@ cmake .. && make && make install
 - solc
 
     ```
-    solc --abi --bin --gas -o ./build one-value.sol
+    solc --abi --bin --gas -o ./build OneValue.sol
     ```
 
 ---
@@ -340,7 +355,7 @@ Node Version Manager - Simple bash script to manage multiple active node.js vers
 ```
 
 ---
-### NVM (install 6.9.1)
+## NVM (install 6.9.1)
 
 - Install:
 ```
@@ -359,6 +374,7 @@ nvm use 6.9.1
 
 ---
 ## Truffle
+- Document: http://truffleframework.com/docs/
 
 - Install:
     `npm install -g truffle`
@@ -369,8 +385,21 @@ nvm use 6.9.1
 - Compile:
     `truffle compile`
 
--  Deploy:
+- Deploy:
     `truffle migrate`
+
+- Test:
+    `truffle test`
+
+---
+## Truffle Dapp
+
+- Default builder is no longer shipped with truffle from 3.*
+
+- Install default builder:
+    `npm install truffle-default-builder --save`
+
+- Config `truffle.js`
 
 - Build frontend:
     `truffle build`
@@ -394,7 +423,9 @@ nvm use 6.9.1
 ---
 ## Deploy contract with Mist
 
-### Contracts -> Deploy new contract -> Paste code and deploy
+- Contracts -> Deploy new contract -> Paste code and deploy
+
+- Remix IDE -> Create
 
 ---
 ## Deploy contract with Truffle
@@ -405,7 +436,7 @@ nvm use 6.9.1
 
 - Edit `OneValue.sol`
 
-- Build: `truffle build`
+- Compile: `truffle compile`
 
 - Add migration file: `3_deploy_one_value_contract.js`
 

@@ -8,32 +8,32 @@ function setStatus(message) {
 };
 
 function refreshBalance() {
-  var meta = MetaCoin.deployed();
-
-  meta.getBalance.call(account, {from: account}).then(function(value) {
-    var balance_element = document.getElementById("balance");
-    balance_element.innerHTML = value.valueOf();
-  }).catch(function(e) {
-    console.log(e);
-    setStatus("Error getting balance; see log.");
-  });
+    return MetaCoin.deployed().then(function(meta) {
+        return meta.getBalance.call(account);
+    }).then(function(outCoinBalance) {
+          var metaCoinBalance = outCoinBalance.toNumber();
+          var balance_element = document.getElementById("balance");
+          balance_element.innerHTML = metaCoinBalance.valueOf();
+    });
 };
 
 function sendCoin() {
-  var meta = MetaCoin.deployed();
+    var meta;
+    var amount = parseInt(document.getElementById("amount").value);
+    var receiver = document.getElementById("receiver").value;
 
-  var amount = parseInt(document.getElementById("amount").value);
-  var receiver = document.getElementById("receiver").value;
-
-  setStatus("Initiating transaction... (please wait)");
-
-  meta.sendCoin(receiver, amount, {from: account}).then(function() {
-    setStatus("Transaction complete!");
-    refreshBalance();
-  }).catch(function(e) {
-    console.log(e);
-    setStatus("Error sending coin; see log.");
-  });
+    return MetaCoin.deployed().then(function(instance) {
+        meta = instance;
+        setStatus("Initiating transaction... (please wait)");
+        return meta.sendCoin(receiver, amount, {from: account});
+    }).then(function(tx) {
+        console.log(tx, tx.tx);
+        setStatus("Transaction complete! </br> txid: " + tx.tx);
+        return refreshBalance();
+    }).catch(function(e){
+        console.log(e);
+        setStatus("Error sending coin; see log.");
+    });
 };
 
 window.onload = function() {
