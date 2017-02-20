@@ -1,0 +1,25 @@
+<head>
+  <title>myDapp</title>
+</head>
+
+<body>
+  <h1>OneValue Contract</h1>
+
+  {{> blockInfo}}
+
+  <br/>
+
+  {{> oneValue}}
+
+</body>
+
+<template name="blockInfo">
+    <span>Block height: {{currentBlock}}</span>
+</template>
+
+<template name="oneValue">
+    <span>OneValue contract at {{oneValueAddress}}</span>
+    <span>Current value: {{currentValue}}</span>
+    <span>Set value: <input name="new-value" id="new-value" type="number" style="width: 100px;"/> <button> Set </button></span>
+    <span>{{getMessage}}</span>
+</template>

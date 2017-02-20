@@ -51,3 +51,6 @@ services/config/service.json
 
 # Truffle build
 truffle_test/build
+
+# node_modules
+node_modules
