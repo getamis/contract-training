@@ -2,7 +2,7 @@ var Web3 = require('web3');
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 var abi = [{"constant":false,"inputs":[{"name":"_id","type":"bytes32"}],"name":"deposit","outputs":[],"payable":false,"type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_id","type":"bytes32"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Deposit","type":"event"}];
 var ClientReceipt = web3.eth.contract(abi);
-var clientReceipt = ClientReceipt.at("0x74e88c1ad4b66cd76bacf7165da056a87e483e87");
+var clientReceipt = ClientReceipt.at("0x32cb389a408cb79ab1e2d23bf1a454f4420f80b2");
 
 var event = clientReceipt.Deposit();
 
@@ -10,7 +10,7 @@ var eventPrint = function(result){
     if(result.event == 'Deposit') {
         console.log("Deposit " + result.args._value +
             " from " +  result.args._from +
-            " to " + result.args._id);
+            " id " + result.args._id);
     }
 }
 
