@@ -18,4 +18,4 @@ Repo for smart contract (solidity) training.
 - [10. References](https://amisamity.github.io/contract-training/slides/7_References.md.html)
 
 ## 課程投影片
-- [課程投影片](LECTURES.md)
+- [課程投影片](LECTURES.MD)
