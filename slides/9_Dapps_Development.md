@@ -266,4 +266,21 @@ oneValue.setValue.sendTransaction(_.toNumber(newValue), function(err, res){
 });
 ```
 
-----
+---
+
+## Deployment - Meteor Galaxy
+
+- Create account: https://galaxy.meteor.com/
+
+- Pricing: starts from $0.04/ hour
+
+- Deploy doc: http://galaxy-guide.meteor.com/
+
+- Quick command: `meteor deploy <your_app_name>.meteorapp.com`
+
+---
+
+## Meteor galaxy dashboard
+
+![alt text](images/meteor-dashboard.png "Meteor dashboard")
+
