@@ -54,7 +54,7 @@ contract OneValue {
 
 ---
 
-## Ethereum Wallet demo
+## Ethereum wallet demo
 
 - Network: mainnet and testnet
 

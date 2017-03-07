@@ -764,7 +764,7 @@ contract Sharer {
 ```
 
 ---
-## Automatic exceptions
+## Automatic exceptions (1/2)
 - Access an array beyond its length (i.e. x[i] where i >= x.length)
 
 - Access a fixed-length bytesN at a too large or negative index.
@@ -777,6 +777,9 @@ contract Sharer {
 
 - Shift by a negative amount.
 
+---
+
+## Automatic exceptions (2/2)
 - Convert a value too big or negative into an enum type.
 
 - Perform an external function call targeting a contract that contains no code.
@@ -784,6 +787,10 @@ contract Sharer {
 - Contract receives Ether via a public function without payable modifier (including the constructor and the fallback function).
 
 - Contract receives Ether via a public accessor function.
+
+- Calling a zero-initialized variable of internal function type.
+
+- A `.transfer()` fails.
 
 ---
 ## No exceptions for `send` and low-level calls
@@ -795,6 +802,8 @@ contract Sharer {
     - `delegatecall`
 
     - `callcode`
+
+- To transfer fund, use `transfer` instead
 
 ---
 ## Constants
