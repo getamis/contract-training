@@ -19,13 +19,16 @@ https://github.com/ethereum/wiki/wiki/JavaScript-API
 - 透過 RPC 與 Ethereum 溝通
 
 - web3: 一般工具函式
-	- web3.eth: Ethereum blockchain 函式
-	- web3.net: 網路狀態
-	- web3.ssh: Whisper 函式 (略過)
+
+    - web3.eth: Ethereum blockchain 函式
+
+    - web3.net: 網路狀態
+
+    - web3.ssh: Whisper 函式 (略過)
 
 ---
 
-## 安裝 Web3 
+## 安裝 Web3
 
 - npm: `npm install web3`
 
@@ -42,20 +45,20 @@ https://github.com/ethereum/wiki/wiki/JavaScript-API
 
 	`--rpc --rpccorsdomain "*" --rpcapi "eth,net,web3"`
 
-- Geth console: 
-	
+- Geth console:
+
     `admin.startRPC("0.0.0.0", 8545, "*","eth,net,web3")`
-    
+
 - 直接使用 Mist browser
-	
+
     Develop -> Toggle Develop Tools -> Mist UI -> `web3.currentProvider`
-	
+
 - 直接使用 MetaMask
- 	
+
     View -> Developer -> JavaScript Console -> `web3.currentPovider`
 
-- Web3 library supported RPC APIs: `eth, db, net, net, personal`
-	
+- Web3 library supported RPC APIs: `eth, db, net, personal`
+
     https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console
 
 ---
@@ -143,7 +146,7 @@ balance.plus(21).toString(10); // toString(10) converts it to a number string
 __Note__: 浮點數只支援到20位，所以盡量都使用Wei(Ethereum貨幣中最小的單位)
 ```Javascript
 var balance = new BigNumber('13124.234435346456466666457455567456');
-balance.plus(21).toString(10); // toString(10) converts it to a number string, but can only show max 20 floating points 
+balance.plus(21).toString(10); // toString(10) converts it to a number string, but can only show max 20 floating points
 // "13145.23443534645646666646" // you number would be cut after the 20 floating point
 ```
 

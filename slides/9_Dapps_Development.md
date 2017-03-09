@@ -63,9 +63,12 @@ cd meteor-dapp-wallet/app
 meteor
 ```
 
-- Connect options:
+- Client options:
+
     - Mist browser
+
     - Chrome with MetaMask
+
     - Browser with Geth RPC
 
 ---
@@ -283,4 +286,3 @@ oneValue.setValue.sendTransaction(_.toNumber(newValue), function(err, res){
 ## Meteor galaxy dashboard
 
 ![alt text](images/meteor-dashboard.png "Meteor dashboard")
-
