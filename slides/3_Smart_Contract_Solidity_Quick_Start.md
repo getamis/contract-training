@@ -80,6 +80,10 @@ Example transaction: [`0xc7e9557e1a97aa4b6cbcd0dd07379121730a68de2bde67b9d5815a6
 ---
 ## Transactions: send ether value
 
+- to: `0x32124ceb661133adabf63189b5950394bbc3e922`
+
+- value: `1123000000000000000`
+
 ```Javascript
 > eth.getTransaction("0xc7e9557e1a97aa4b6cbcd0dd07379121730a68de2bde67b9d5815a69b35a250f")
 {
@@ -102,6 +106,9 @@ Example transaction: [`0xc7e9557e1a97aa4b6cbcd0dd07379121730a68de2bde67b9d5815a6
 
 ---
 ## Transactions: send ether value
+
+- gasUsed: `21000`
+
 ```Javascript
 > eth.getTransactionReceipt("0xc7e9557e1a97aa4b6cbcd0dd07379121730a68de2bde67b9d5815a69b35a250f")
 {
@@ -146,6 +153,11 @@ Example transaction: [`0xc4974221fedc7455c68d980b396ae9a2dd210bb149f448c0d56bea1
 
 ---
 ## Transactions: create / deploy contract
+
+- input: `"0x606060405260405160208060cf833981016040528080519060200190919050505b806000600050819055505b5060978060386000396000f360606040526000357c010000000000000000000000000000000000000000000000000000000090048063209652551460415780635524107714606257603f565b005b604c60048050506078565b6040518082815260200191505060405180910390f35b607660048080359060200190919050506089565b005b600060006000505490506086565b90565b806000600050819055505b5056000000000000000000000000000000000000000000000000000000000000007b"`
+
+- to: `null`
+
 ```Javascript
 > eth.getTransaction("0xc4974221fedc7455c68d980b396ae9a2dd210bb149f448c0d56bea15badd98b2")
 {
@@ -167,6 +179,9 @@ Example transaction: [`0xc4974221fedc7455c68d980b396ae9a2dd210bb149f448c0d56bea1
 ```
 ---
 ## Transactions: create / deploy contract
+
+- contractAddress: `0xd34d02bd80b7ad234305e734bd229746e5fe204e`
+
 ```JavaScript
 > eth.getTransactionReceipt("0xc4974221fedc7455c68d980b396ae9a2dd210bb149f448c0d56bea15badd98b2")
 {
@@ -192,7 +207,7 @@ node update-contract-test.js
 ```
 
 ```Javascript
-var txid = oneValue.setValue.sendTransaction(456,
+var txid = oneValue.setValue.sendTransaction(1234,
     {from:addr, to:oneValue.address, gas:200000});
 eth.getTransation(txid);
 //After mined
@@ -204,6 +219,15 @@ Example transaction: [`0xf9132a6811770ffdecb5bd9ea9decc15beb66532f97d8ea0bca4f44
 
 ---
 ## Transactions: send contract tx
+
+- to: `0xd34d02bd80b7ad234305e734bd229746e5fe204e`
+
+- input: `0x5524107700000000000000000000000000000000000000000000000000000000000004d2`
+
+    - function id: bytes4(web3.sha3("setValue(uint256)")) => 0x55241077
+
+    - arguments: web3.toHex(1234) => 0x4d2
+
 ```Javascript
 > eth.getTransaction("0xf9132a6811770ffdecb5bd9ea9decc15beb66532f97d8ea0bca4f44cc135c276")
 {
@@ -621,7 +645,7 @@ Full list: http://solidity.readthedocs.io/en/latest/units-and-global-variables.h
 ---
 class: center, middle
 
-## Expressions and Control Structures
+# Expressions and Control Structures
 
 ---
 
@@ -843,7 +867,7 @@ contract Rejector {
 
 contract Caller {
     function callTest(address testAddress) {
-        Test(testAddress).call(0xabcdef01); // hash does not exist
+        Test(testAddress).call(0xabcde01); // hash does not exist
         // results in Test(testAddress).x becoming == 1.
         Rejector r = Rejector(0x123);
         r.send(2 ether);
