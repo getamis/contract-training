@@ -13,7 +13,7 @@
 ## 台科大 (03/17/2017)
 - [0. Agenda](https://amisamity.github.io/contract-training/slides/0_Agenda_03172017.md.html)
 - [1. Ethereum Development Environment and Tools](https://amisamity.github.io/contract-training/slides/2_Ethereum_Development_Environment_and_Tools.md.html)
-- [2. Smart Contract and Solidity](https://amisamity.github.io/contract-training/slides/3_Smart_Contract_Solidity_Quick_Start.md.html)
+- [2. Ðapp Example - FlightDelay](https://amisamity.github.io/contract-training/slides/8_Insurance_Examples.md.html)
 - [3. Web3 JavaScript Ðapp API](https://amisamity.github.io/contract-training/slides/10_Web3_JavaScript.md.html)
 - [4. Ðapps Development](https://amisamity.github.io/contract-training/slides/9_Dapps_Development.md.html)
 - [5. References](https://amisamity.github.io/contract-training/slides/7_References.md.html)
