@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>Dapps Development</title>
+		<title>以太坊開發工具</title>
 		<style>
 			body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -126,232 +126,155 @@ code {
 	</head>
 	<body>
 		<textarea id="source">
-class: center, middle
-
-# Dapps Development
-
----
-
-## What are Dapps
-
-- Dapps - decentralized applications
-
-- Ethereum Dapps - applications interact with Ethereum blockchain
+## 以太坊開發工具
+- __結點 / 錢包__
+- 智能合約開發工具，函式庫
 
 ---
 
-## Development environment
-
-- Ethereum RPC: (Geth, Mist, MetaMask)
-
-- Library: Web3
-
-- Framework: Meteor, Truffle
-
-    - We will focus on __Meteor__ in this lecture
-
-    - For __Truffle__ please see [Ethereum Development Environment and Tools](https://amisamity.github.io/contract-training/slides/2_Ethereum_Development_Environment_and_Tools.md.html)
+## 圖形化錢包 / 節點：Mist/Ethereum wallet
+- 錢包
+- Ðapps 瀏覽器
+- 本地節點
+- Github: https://github.com/ethereum/mist
+- Installable binaries: https://github.com/ethereum/mist/releases
 
 ---
 
-## Web3 API Connection
-
-- Geth: ` admin.startRPC("0.0.0.0", 8545, "*","db,eth,net,web3,personal")`
-    ```Javascript
-    web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-    ```
-- Mist: `http://localhost:3000/`
-    Will be replaced with IpcProvider
-    ```Javascript
-    > web3.currentProvider
-    > IpcProvider
-    ```
-- MetaMask: `http://localhost:3000/` in Chrome
-    Will be replaced with MetamaskInpageProvider
-    ```Javascript
-    > web3.currentProvider
-    > MetamaskInpageProvider
-    ```
+## Ethereum wallet demo
+- Network: mainnet and testnet
+- Mining: testnet only (can still enable it via console)
+- Wallets
+- Send
+- Contracts
 
 ---
 
-## Dapp example (Meteor): Ethereum Wallet
+## 雲端錢包: MetaMask
+- 雲端節點: 不須等待資料同步
+- MetaMask: https://metamask.io/
+![alt text](images/metamask.png "MetaMask")
 
-```
-git clone git@github.com:ethereum/meteor-dapp-wallet.git
-npm install  
-cd meteor-dapp-wallet/app
-meteor
+---
+
+## Geth 節點
+- 以太坊 Golang 實作節點
+- Mist 預設使用節點
+- Ethstats 上大部分是 `Geth` 和 `Parity`
+    - https://ethstats.net/
+
+---
+
+## 利用 geth 連上 mainnet
+```bash
+geth --fast  \
+    --datadir "~/.eth/mainnet"  \
+    --rpc --rpccorsdomain "*"  \
+    --ipcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3"  \
+    --rpcapi "db,eth,net,web3,personal"  \
+    --rpcport "8547"  \
+    --port "30305" \
+    console
 ```
 
-- Client options:
-
-    - Mist browser
-
-    - Chrome with MetaMask
-
-    - Browser with Geth RPC
-
 ---
 
-## Meteor
-
-- Framework for building javascript apps.
-https://www.meteor.com/
-
----
-
-## Meteor - get started
-
-- Install:
-
-    `curl https://install.meteor.com/ | sh`
-
-- Create app
-
-    `meteor create myDapp`
-
-- Install app packages
-
-    `cd myDapp && npm install`
-
-- Run
-
-    `meteor`
-
----
-
-## Meteor - add Libraries
-
-- Required:
-
-    ```
-    meteor add ethereum:web3
-    meteor add less
-    meteor add ethereum:dapp-styles
-    ```
-
-- Optionals
-
-    ```
-    meteor add ethereum:tools
-    meteor add ethereum:elements
-    meteor add ethereum:accounts
-    meteor add ethereum:blocks
-    meteor add frozeman:template-var
-    meteor add frozeman:persistent-minimongo2
-    ```
-
----
-
-## Meteor - ethereum libraries
-
-- `ethereum:tools`: https://github.com/ethereum/meteor-package-tools
-
-- `ethereum:blocks`: https://github.com/ethereum/meteor-package-blocks
-
-- `ethereum:elements`: https://github.com/ethereum/meteor-package-elements
-
-- `ethereum:accounts:`: https://github.com/ethereum/meteor-package-accounts
-
----
-
-## Meteor - file structure
-
-- __client__ : loaded by the client. Most of our files go.
-
-- __lib__: loaded before other files in the same folder.
-
-- __public__: assets available on the root of the Dapp.
-
----
-
-## Meteor - add web3 Library
-
-```
-mkdir lib
-cd lib && touch init.js
+## 利用 geth 連上 testnet
+```bash
+geth --fast \
+    --datadir "~/.eth/testnet"  \
+    --ipcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3"  \
+    --rpc --rpccorsdomain "*"  \
+    --rpcapi "db,eth,net,web3,personal"  \
+    --rpcport "8546" \
+    --port "30304" \
+    --testnet \
+    console
 ```
 
-Add following:
+---
 
+## 利用 geth 跑私有鏈
+- 使用 `networkid`
+
+```bash
+geth --fast \
+    --datadir "~/.eth/privnet"  \
+    --ipcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3"  \
+    --rpc --rpccorsdomain "*"  \
+    --rpcapi "db,eth,net,web3,personal"  \
+    --rpcport "8545" \
+    --port "30303" \
+    --networkid "12345" \
+    --nodiscover \
+    console
+```
+
+---
+
+## 利用 geth 跑私有鏈
+- 使用 `networkid`及`genesis.json`
+
+```JavaScript
+{
+  "nonce": "0x0000000000000042",
+  "timestamp": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "extraData": "Any extra data 134ADFAD",
+  "gasLimit": "0x47e7c4",
+  "difficulty": "0x9c40",
+  "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x3333333333333333333333333333333333333333",
+  "alloc": {
+    "0x60cafee22ae353ac9de07852a682558c9bb84e61": {
+      "balance": "999999999999999999999999999999999"
+    }
+  }
+}
+```
+
+---
+
+## 利用 geth 跑私有鏈
+- 使用 `networkid`及`genesis.json`
+
+Init blockchain:
+```bash
+geth --datadir "~/.eth/privnet2"  \
+    init "/PATH/TO/genesis.json"
+```
+
+Run:
+```bash
+geth --fast \
+    --datadir "~/.eth/privnet2"  \
+    --ipcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3"  \
+    --rpc --rpccorsdomain "*"  \
+    --rpcapi "db,eth,net,web3,personal"  \
+    --rpcport "8545" \
+    --port "30303" \
+    --networkid "12345" \
+    --nodiscover \
+    console
+```
+
+---
+
+## 以太坊節點
+- 同步區塊鏈網路資料：建立本地端資料備份
+- 錢包：發送交易
+- 提供 API 接口：RPC, IPC, WebSocket
+
+---
+
+## 以太坊開發工具
+- 結點 / 錢包
+- __智能合約開發工具，函式庫__
+
+---
+
+## Simple contract: OneValueContract
 ```Javascript
-if(typeof web3 === 'undefined')
-    web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-```
-
----
-
-## Meteor - check web3 connection
-
-- Run meteor:
-
-    ```bash
-    meteor
-    ```
-
-- Open chrome:
-    View -> Developer -> Javascript Console
-
-    ```bash
-    web3.eth.accounts
-    ```
-
----
-
-## Meteor - styling
-
-- rename main.css to main.less
-
-- add following
-
-    ```Javascript
-    // libs
-    @import '{ethereum:dapp-styles}/dapp-styles.less';
-
-    ```
-
----
-
-## Meteor - using ethereum packages (1/2)
-
-- In main.html:
-    - Add `{{> blockInfo}}` in `body` section.
-    - Add following in the end
-
-    ```html
-    <template name="blockInfo">
-        <span>Block height: {{currentBlock}}</span>
-    </template>
-    ```
-
----
-
-## Meteor - using ethereum packages (2/2)
-
-- In main.js:
-
-```Javascript
-Template.blockInfo.onCreated(function blockInfoOnCreated(){
-    EthBlocks.init();
-});
-
-Template.blockInfo.helpers({
-    currentBlock(){
-        return EthBlocks.latest.number;
-    },
-});
-```
-
----
-
-## OneValue with Meteor - OneValue Contract
-
-Deployed at: `0xe07438274839E9793baEAaa757F695CfED4A9e26`
-
-```Javascript
-pragma solidity ^0.4.4;
-
 contract OneValue {
     uint256 value;
 
@@ -363,7 +286,7 @@ contract OneValue {
         value = v;
     }
 
-    function getValue() constant returns (uint256 result) {
+    function getValue() constant returns (uint256 result){
         return value;
     }
 }
@@ -371,52 +294,155 @@ contract OneValue {
 
 ---
 
-## OneValue with Meteor - interaction (1/2)
+## Solidity compiler: solc
+- solcjs
+```bash
+npm install solc -g
+```
 
-OneValue instance:
-
-```Javascript
-var abi = [{"constant":true,"inputs":[],"name":"getValue","outputs":[{"name":"result","type":"uint256"}],"type":"function"},{"constant":false,"inputs":[{"name":"v","type":"uint256"}],"name":"setValue","outputs":[],"type":"function"},{"inputs":[{"name":"initValue","type":"uint256"}],"type":"constructor"}];;
-var OneValueContract = web3.eth.contract(abi);
-this.contractAddress = '0xe07438274839E9793baEAaa757F695CfED4A9e26';
-var oneValue = this.oneValue = OneValueContract.at(this.contractAddress);
+- solc: https://github.com/ethereum/solidity
+```bash
+git clone --recursive https://github.com/ethereum/solidity.git
+cd solidity
+mkdir build
+cd build
+cmake .. && make && make install
 ```
 
 ---
 
-## OneValue with Meteor - interaction (1/2)
+## Compile contract
+- Browser-Solidity (Remix IDE):
+    https://ethereum.github.io/browser-solidity/
+- solc
+    ```bash
+    solc --abi --bin --gas -o ./build OneValue.sol
+    ```
 
-- Get value:
+---
+
+## Web3
+- Web3: ethereum compatible [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API) which implements the [Generic JSON RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC) spec
+
+- 安裝: `npm install web3`  
+
+---
+
+## Web3 使用方式
+- Enable rpc in console:
+    ```Javascript
+    admin.startRPC("0.0.0.0", 8545, "*","db,eth,net,web3,personal")
+    ```
+- Example code: `node web3-test.js`
+    ```Javascript
+    var Web3 = require('web3');
+    var web3 = new Web3(
+        new Web3.providers.HttpProvider("http://localhost:8545"));
+
+    web3.eth.getBlock(48, function(error, result){
+        if(!error)
+            console.log(result)
+        else
+            console.error(error);
+    });
+    ```
+
+---
+## Contract deployment
+- Mist
+- Web3
+
+---
+## Deploy contract with Mist
+- Contracts → Deploy new contract → Paste code and deploy
+- Remix IDE → Create
+
+---
+
+## Deploy contract with Web3
+- Deploy to testnet:
+    ```Javascript
+    node deploy-contract-test.js
+    ```
+
+---
+
+## Deploy contract with Web3 程式碼節錄    
+- Example code (partial):
+    ```Javascript
+    var abi  = ...
+    var evmCode = ...
+    var OneValueContract = web3.eth.contract(abi);
+    var oneValue = OneValueContract.new(initValue,
+        {from:addr, data: evmCode, gas: 4700000},
+        function(error, contract){
+            ...
+        }
+    );
+    ```
+---
+
+## Testrpc
+
+- Fast Ethereum RPC client for testing and development. (RPC mock)
+- 安裝：
+    ```bash
+    npm install -g ethereumjs-testrpc
+    ```
+- 使用：
+    ```bash
+    testrpc -p 8547
+    ```
+
+---
+
+## Web3 連線到 Testrpc
+- Connect with Web3:
+    ```bash
+    node web3-testrpc.js
+    ```
+
+    ```Javascript
+    var Web3 = require('web3');
+    var TestRPC = require("ethereumjs-testrpc");
+    var web3 = new Web3(TestRPC.provider());
+    web3.eth.getAccounts(function(e, accts){
+        console.log("error:", e);
+        console.log("accounts:", accts);
+        process.exit(0);
+    });
+    ```
+
+---
+
+## Deploy contract with Web3
+- Deploy to testrpc:
+    ```Javascript
+    node deploy-contract-testrpc.js
+    ```
+
+---
+
+## 與智能合約互動 (Express + Web3)
+
+- Example (partial):
+
 ```Javascript
-oneValue.getValue(function(err, res){
-    currentValue.set(res.toNumber());
+var abi  = ... var OneValueContract = web3.eth.contract(abi);
+var contractAddress = '0x36274a6286c9cf3c8e09c85c5bfa572a8827fddc'; //Testnet
+var oneValue = OneValueContract.at(contractAddress);
+
+app.get('/', function (req, res) {
+  res.send(
+      'OneValue Instance: ' + contractAddress + "\n" +
+      'Value: '+ oneValue.getValue() + "\n");
 });
+
+app.listen(3000)
 ```
 
-- Set value:
-```Javascript
-oneValue.setValue.sendTransaction(_.toNumber(newValue), function(err, res){
-    message.set("Transaction hash: " + res);
-});
-```
-
----
-
-## Deployment - Meteor Galaxy
-
-- Create account: https://galaxy.meteor.com/
-
-- Pricing: starts from $0.04/ hour
-
-- Deploy doc: http://galaxy-guide.meteor.com/
-
-- Quick command: `meteor deploy <your_app_name>.meteorapp.com`
-
----
-
-## Meteor galaxy dashboard
-
-![alt text](images/meteor-dashboard.png "Meteor dashboard")
+- Run: `node express-example.js`
+- Test: `curl http://localhost:3000`
 
 		</textarea>
 		<script>require=(function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({"components/printing":[function(require,module,exports){

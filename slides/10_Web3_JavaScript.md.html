@@ -9,25 +9,35 @@
 }
 
 h1, h2, h3 {
-    font-weight: 400;
+    font-weight: 500;
     margin-bottom: 0;
+    color: #dadada;
 }
 
 .remark-slide-content h1 {
-    font-size: 3em;
+    font-size: 3.2em;
 }
 
 .remark-slide-content h2 {
-    font-size: 2em;
+    font-size: 2.2em;
 }
 
 .remark-slide-content h3 {
-    font-size: 1.6em;
+    font-size: 1.8em;
 }
 
 .remark-slide-content {
     background: #272822;
     color: #f3f3f3;
+}
+
+.remark-slide-content li {
+    font-size: 1.4em;
+    margin: 14px 0;
+}
+
+.remark-slide-content li li{
+    font-size: 1em;
 }
 
 .footnote {
@@ -219,25 +229,6 @@ web3.eth.getBlock(48, function(error, result){
 
 ---
 
-## 批次呼叫
-
-__Note__: 批次處理不會比較快，但能確保執行順序。
-
-```Javascript
-var callback = function(error, result){
-	if(!error)
-    	console.log(result);
-    else
-    	console.error(error);
-};
-var batch = web3.createBatch();
-batch.add(web3.eth.getBlock.request(48, callback));
-batch.add(web3.eth.getBalance.request('0x4121074B75481f0fD6f75aeE48890CA2f74f377F', 'latest', callback));
-batch.execute();
-```
-
----
-
 ## BigNumber (1/2)
 
 JavaScript 無法處理 big number
@@ -278,7 +269,7 @@ https://github.com/ethereum/wiki/wiki/JavaScript-API#web3js-api-reference
 
 ## Web3 常用工具函式
 
-- 單位轉換:
+- 單位轉換：(http://ether.fund/tool/converter)
 
 ```Javascript
 var weiValue = web3.toWei('12', 'ether');

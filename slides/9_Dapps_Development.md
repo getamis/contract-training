@@ -29,24 +29,17 @@ class: center, middle
 ## Web3 API Connection
 
 - Geth: ` admin.startRPC("0.0.0.0", 8545, "*","db,eth,net,web3,personal")`
-
     ```Javascript
     web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
     ```
-
 - Mist: `http://localhost:3000/`
-
     Will be replaced with IpcProvider
-
     ```Javascript
     > web3.currentProvider
     > IpcProvider
     ```
-
 - MetaMask: `http://localhost:3000/` in Chrome
-
     Will be replaced with MetamaskInpageProvider
-
     ```Javascript
     > web3.currentProvider
     > MetamaskInpageProvider
@@ -75,7 +68,7 @@ meteor
 
 ## Meteor
 
-Framework for building javascript apps.
+- Framework for building javascript apps.
 https://www.meteor.com/
 
 ---
@@ -163,18 +156,18 @@ if(typeof web3 === 'undefined')
 
 ## Meteor - check web3 connection
 
-Run meteor:
+- Run meteor:
 
-```
-meteor
-```
+    ```bash
+    meteor
+    ```
 
-Open chrome:
+- Open chrome:
     View -> Developer -> Javascript Console
 
-```
-web3.eth.accounts
-```
+    ```bash
+    web3.eth.accounts
+    ```
 
 ---
 
@@ -194,11 +187,9 @@ web3.eth.accounts
 
 ## Meteor - using ethereum packages (1/2)
 
-In main.html:
-
-- Add `{{> blockInfo}}` in `body` section.
-
-- Add following in the end
+- In main.html:
+    - Add `{{> blockInfo}}` in `body` section.
+    - Add following in the end
 
     ```html
     <template name="blockInfo">
@@ -210,7 +201,7 @@ In main.html:
 
 ## Meteor - using ethereum packages (2/2)
 
-In main.js:
+- In main.js:
 
 ```Javascript
 Template.blockInfo.onCreated(function blockInfoOnCreated(){
@@ -267,14 +258,14 @@ var oneValue = this.oneValue = OneValueContract.at(this.contractAddress);
 
 ## OneValue with Meteor - interaction (1/2)
 
-Get value:
+- Get value:
 ```Javascript
 oneValue.getValue(function(err, res){
     currentValue.set(res.toNumber());
 });
 ```
 
-Set value:
+- Set value:
 ```Javascript
 oneValue.setValue.sendTransaction(_.toNumber(newValue), function(err, res){
     message.set("Transaction hash: " + res);

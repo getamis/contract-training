@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>Dapps Development</title>
+		<title>Blockchain FAQ</title>
 		<style>
 			body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -128,295 +128,50 @@ code {
 		<textarea id="source">
 class: center, middle
 
-# Dapps Development
+# Blockchain FAQ
 
 ---
 
-## What are Dapps
-
-- Dapps - decentralized applications
-
-- Ethereum Dapps - applications interact with Ethereum blockchain
-
----
-
-## Development environment
-
-- Ethereum RPC: (Geth, Mist, MetaMask)
-
-- Library: Web3
-
-- Framework: Meteor, Truffle
-
-    - We will focus on __Meteor__ in this lecture
-
-    - For __Truffle__ please see [Ethereum Development Environment and Tools](https://amisamity.github.io/contract-training/slides/2_Ethereum_Development_Environment_and_Tools.md.html)
+## 什麼是區塊鏈？
+- 可看成去中心化資料庫
+- 所有區塊鏈網路上節點共同維護一公開帳本（以比特幣為例）
+- 資料以一個個區塊方式連結，而串成一個區塊鏈
 
 ---
 
-## Web3 API Connection
-
-- Geth: ` admin.startRPC("0.0.0.0", 8545, "*","db,eth,net,web3,personal")`
-    ```Javascript
-    web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-    ```
-- Mist: `http://localhost:3000/`
-    Will be replaced with IpcProvider
-    ```Javascript
-    > web3.currentProvider
-    > IpcProvider
-    ```
-- MetaMask: `http://localhost:3000/` in Chrome
-    Will be replaced with MetamaskInpageProvider
-    ```Javascript
-    > web3.currentProvider
-    > MetamaskInpageProvider
-    ```
+## 什麼是去中心化？
+- 相對於中心化，例如上市證券交易必須透過證交所
+- 任何節點都可以成為可靠的資料來源
 
 ---
 
-## Dapp example (Meteor): Ethereum Wallet
-
-```
-git clone git@github.com:ethereum/meteor-dapp-wallet.git
-npm install  
-cd meteor-dapp-wallet/app
-meteor
-```
-
-- Client options:
-
-    - Mist browser
-
-    - Chrome with MetaMask
-
-    - Browser with Geth RPC
+## 什麼是共識演算法？
+- 產生區塊的方式
+- 比特幣和以太幣網路都是用工作量證明(Proof of Work/PoW)
 
 ---
 
-## Meteor
-
-- Framework for building javascript apps.
-https://www.meteor.com/
+## 什麼是挖礦，為什麼要挖礦？
+- 工作量證明中，必須算出一個nonce值用以產生合法的區塊，算出這個nonce來得到獎勵的過程就要做挖礦 (mining)
 
 ---
 
-## Meteor - get started
-
-- Install:
-
-    `curl https://install.meteor.com/ | sh`
-
-- Create app
-
-    `meteor create myDapp`
-
-- Install app packages
-
-    `cd myDapp && npm install`
-
-- Run
-
-    `meteor`
+## 什麼是節點？
+- 利用 p2p 方式連上區塊鏈網路即成為節點
+- 在比特幣網路中可執行 `bitcoind` 程式
+- 在以太幣網路中可執行 `geth` 程式
 
 ---
 
-## Meteor - add Libraries
-
-- Required:
-
-    ```
-    meteor add ethereum:web3
-    meteor add less
-    meteor add ethereum:dapp-styles
-    ```
-
-- Optionals
-
-    ```
-    meteor add ethereum:tools
-    meteor add ethereum:elements
-    meteor add ethereum:accounts
-    meteor add ethereum:blocks
-    meteor add frozeman:template-var
-    meteor add frozeman:persistent-minimongo2
-    ```
+## 什麼是公有鏈，私有鏈，Mainnet，Testnet？
+- 公有鏈是大家都可以連上的區塊鏈網路
+- Mainnet 等於是公有鏈上的正式環境，Testnet 等於是公有鏈上的測試環境
+- 私有鏈可以是跑在私有網路的區塊鏈網路，或是需要特定權限的節點才能加入的區塊鏈網路
 
 ---
 
-## Meteor - ethereum libraries
-
-- `ethereum:tools`: https://github.com/ethereum/meteor-package-tools
-
-- `ethereum:blocks`: https://github.com/ethereum/meteor-package-blocks
-
-- `ethereum:elements`: https://github.com/ethereum/meteor-package-elements
-
-- `ethereum:accounts:`: https://github.com/ethereum/meteor-package-accounts
-
----
-
-## Meteor - file structure
-
-- __client__ : loaded by the client. Most of our files go.
-
-- __lib__: loaded before other files in the same folder.
-
-- __public__: assets available on the root of the Dapp.
-
----
-
-## Meteor - add web3 Library
-
-```
-mkdir lib
-cd lib && touch init.js
-```
-
-Add following:
-
-```Javascript
-if(typeof web3 === 'undefined')
-    web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-```
-
----
-
-## Meteor - check web3 connection
-
-- Run meteor:
-
-    ```bash
-    meteor
-    ```
-
-- Open chrome:
-    View -> Developer -> Javascript Console
-
-    ```bash
-    web3.eth.accounts
-    ```
-
----
-
-## Meteor - styling
-
-- rename main.css to main.less
-
-- add following
-
-    ```Javascript
-    // libs
-    @import '{ethereum:dapp-styles}/dapp-styles.less';
-
-    ```
-
----
-
-## Meteor - using ethereum packages (1/2)
-
-- In main.html:
-    - Add `{{> blockInfo}}` in `body` section.
-    - Add following in the end
-
-    ```html
-    <template name="blockInfo">
-        <span>Block height: {{currentBlock}}</span>
-    </template>
-    ```
-
----
-
-## Meteor - using ethereum packages (2/2)
-
-- In main.js:
-
-```Javascript
-Template.blockInfo.onCreated(function blockInfoOnCreated(){
-    EthBlocks.init();
-});
-
-Template.blockInfo.helpers({
-    currentBlock(){
-        return EthBlocks.latest.number;
-    },
-});
-```
-
----
-
-## OneValue with Meteor - OneValue Contract
-
-Deployed at: `0xe07438274839E9793baEAaa757F695CfED4A9e26`
-
-```Javascript
-pragma solidity ^0.4.4;
-
-contract OneValue {
-    uint256 value;
-
-    function OneValue(uint256 initValue) {
-        value = initValue;
-    }
-
-    function setValue(uint256 v) {
-        value = v;
-    }
-
-    function getValue() constant returns (uint256 result) {
-        return value;
-    }
-}
-```
-
----
-
-## OneValue with Meteor - interaction (1/2)
-
-OneValue instance:
-
-```Javascript
-var abi = [{"constant":true,"inputs":[],"name":"getValue","outputs":[{"name":"result","type":"uint256"}],"type":"function"},{"constant":false,"inputs":[{"name":"v","type":"uint256"}],"name":"setValue","outputs":[],"type":"function"},{"inputs":[{"name":"initValue","type":"uint256"}],"type":"constructor"}];;
-var OneValueContract = web3.eth.contract(abi);
-this.contractAddress = '0xe07438274839E9793baEAaa757F695CfED4A9e26';
-var oneValue = this.oneValue = OneValueContract.at(this.contractAddress);
-```
-
----
-
-## OneValue with Meteor - interaction (1/2)
-
-- Get value:
-```Javascript
-oneValue.getValue(function(err, res){
-    currentValue.set(res.toNumber());
-});
-```
-
-- Set value:
-```Javascript
-oneValue.setValue.sendTransaction(_.toNumber(newValue), function(err, res){
-    message.set("Transaction hash: " + res);
-});
-```
-
----
-
-## Deployment - Meteor Galaxy
-
-- Create account: https://galaxy.meteor.com/
-
-- Pricing: starts from $0.04/ hour
-
-- Deploy doc: http://galaxy-guide.meteor.com/
-
-- Quick command: `meteor deploy <your_app_name>.meteorapp.com`
-
----
-
-## Meteor galaxy dashboard
-
-![alt text](images/meteor-dashboard.png "Meteor dashboard")
+## 什麼是 Ethereum Virtual Machine (EVM)?
+- EVM 是以太坊實現 Blockchain 2.0 的主要元件，它可以用來執行智能合約編譯後的Byte code，並確保不同電腦架構下的節點在相同的輸入下可以有相同的輸出
 
 		</textarea>
 		<script>require=(function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({"components/printing":[function(require,module,exports){

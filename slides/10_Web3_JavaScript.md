@@ -101,25 +101,6 @@ web3.eth.getBlock(48, function(error, result){
 
 ---
 
-## 批次呼叫
-
-__Note__: 批次處理不會比較快，但能確保執行順序。
-
-```Javascript
-var callback = function(error, result){
-	if(!error)
-    	console.log(result);
-    else
-    	console.error(error);
-};
-var batch = web3.createBatch();
-batch.add(web3.eth.getBlock.request(48, callback));
-batch.add(web3.eth.getBalance.request('0x4121074B75481f0fD6f75aeE48890CA2f74f377F', 'latest', callback));
-batch.execute();
-```
-
----
-
 ## BigNumber (1/2)
 
 JavaScript 無法處理 big number
@@ -160,7 +141,7 @@ https://github.com/ethereum/wiki/wiki/JavaScript-API#web3js-api-reference
 
 ## Web3 常用工具函式
 
-- 單位轉換:
+- 單位轉換：(http://ether.fund/tool/converter)
 
 ```Javascript
 var weiValue = web3.toWei('12', 'ether');
